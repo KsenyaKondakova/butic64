@@ -30,6 +30,12 @@ jobs:
       - name: Debug SSH Private Key
         run: echo "${{ secrets.SSH_PRIVATE_KEY }}"
 
+      - name: Save Key to File
+        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > key.pem
+
+      - name: Display Key File Content
+        run: cat key.pem
+
       - name: Debug Remote Connection
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > key.pem
