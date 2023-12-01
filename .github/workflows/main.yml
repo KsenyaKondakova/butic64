@@ -38,7 +38,10 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > $HOME/.ssh/private_key.pem
           chmod 600 $HOME/.ssh/private_key.pem
           eval $(ssh-agent -s)
-          ssh-add <(echo "$SSH_PRIVATE_KEY")
+          TMPFILE=$(mktemp)
+          echo "$SSH_PRIVATE_KEY" > $TMPFILE
+          ssh-add $TMPFILE
+          rm $TMPFILE
 
       - name: Deploy to Remote Server
         run: |
