@@ -38,7 +38,7 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > $HOME/.ssh/private_key.pem
           chmod 600 $HOME/.ssh/private_key.pem
           eval $(ssh-agent -s)
-          ssh-add $HOME/.ssh/private_key.pem
+          ssh-add - <<< "$SSH_PRIVATE_KEY"
 
       - name: Deploy to Remote Server
         run: |
