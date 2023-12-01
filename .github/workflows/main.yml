@@ -33,5 +33,5 @@ jobs:
           echo "" > $HOME/.ssh/known_hosts
           ssh-keyscan -H 212.233.77.110 >> $HOME/.ssh/known_hosts
           echo "$SSH_PRIVATE_KEY" > private_key.pem
-          chmod 600 private_key.pem
-          ssh -i private_key.pem ubuntu@212.233.77.110 "cd /var/www/nextjs/butic64 && git pull origin main && npm install && pm2 restart nextjs"
+          chmod 600 $HOME/.ssh/private_key.pem
+          ssh -i  $HOME/.ssh/private_key.pem ubuntu@212.233.77.110 "cd /var/www/nextjs/butic64 && git pull origin main && npm install && pm2 restart nextjs"
