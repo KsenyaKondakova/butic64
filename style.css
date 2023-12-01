@@ -1,3 +1,12 @@
 body{
-    color: red;
+    background-color: #FAF7EF;
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+P{
+    color: #232323;
+    font-size: 50px;
+    text-align: right;
 }
