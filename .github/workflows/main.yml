@@ -29,6 +29,7 @@ jobs:
 
       - name: Deploy to Remote Server
         run: |
+          mkdir -p $HOME/.ssh
           echo "" > $HOME/.ssh/known_hosts
           ssh-keyscan -H 212.233.77.110 >> $HOME/.ssh/known_hosts
           echo "$SSH_PRIVATE_KEY" > private_key.pem
