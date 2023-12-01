@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 18
 
       - name: Install Dependencies
         run: |
@@ -27,8 +27,29 @@ jobs:
         run: |
           npm run build
 
+      - name: Debug SSH Private Key
+        run: echo "${{ secrets.SSH_PRIVATE_KEY }}"
+
+      - name: Save Key to File
+        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > key.pem
+
+      - name: Display Key File Content
+        run: cat key.pem
+
+      - name: Add Remote Host to known_hosts
+        run: |
+          mkdir -p $HOME/.ssh
+          touch $HOME/.ssh/known_hosts
+          ssh-keyscan -H 212.233.77.110 >> $HOME/.ssh/known_hosts
+
+      - name: Change Permissions for Key File
+        run: chmod 600 key.pem
+
+      - name: Debug Remote Connection
+        run: |
+          scp -i key.pem key.pem ubuntu@212.233.77.110:/tmp
+          ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@212.233.77.110 "echo Debugging Remote Connection"
+
       - name: Deploy to Remote Server
         run: |
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@212.233.77.110 "cd /var/www/nextjs/butic64 && git pull origin main"
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@212.233.77.110 "cd /var/www/nextjs/butic64 && npm install"
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@212.233.77.110 "cd /var/www/nextjs/butic64 && pm2 restart nextjs"
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@212.233.77.110 "cd /var/www/nextjs/butic64 && git pull origin main && npm install && pm2 restart nextjs"
