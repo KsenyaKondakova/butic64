@@ -36,6 +36,12 @@ jobs:
       - name: Display Key File Content
         run: cat key.pem
 
+      - name: Add Remote Host to known_hosts
+        run: |
+          mkdir -p $HOME/.ssh
+          touch $HOME/.ssh/known_hosts
+          ssh-keyscan -H 212.233.77.110 >> $HOME/.ssh/known_hosts
+
       - name: Debug Remote Connection
         run: |
           scp -i key.pem key.pem ubuntu@212.233.77.110:/tmp
