@@ -52,4 +52,4 @@ jobs:
 
       - name: Deploy to Remote Server
         run: |
-          ssh -i key.pem ubuntu@212.233.77.110 "cd /var/www/nextjs/butic64 && sudo git pull origin main && sudo npm install && sudo npm run build && sudo npm run start && sudo pm2 restart butic64"
+          ssh -i key.pem ubuntu@212.233.77.110 "cd /var/www/nextjs/butic64 && sudo git pull origin main && sudo npm install && sudo npm run build && sudo pm2 reload butic64 --update-env"
