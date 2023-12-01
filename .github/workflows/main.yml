@@ -47,7 +47,7 @@ jobs:
 
       - name: Debug Remote Connection
         run: |
-          scp -i key.pem key.pem ubuntu@212.233.77.110:/tmp
+          scp -i key.pem ubuntu@212.233.77.110:/tmp
           ssh -i key.pem -o StrictHostKeyChecking=no ubuntu@212.233.77.110 "echo Debugging Remote Connection"
 
       - name: Deploy to Remote Server
