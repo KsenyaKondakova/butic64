@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
+// next.config.js
+const withTM = require('next-transpile-modules')(['node-fetch']);
 
-module.exports = nextConfig
+module.exports = withTM({
+  reactStrictMode: true,
+  // Другие настройки Next.js
+});

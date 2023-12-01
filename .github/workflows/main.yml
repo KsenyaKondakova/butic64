@@ -19,10 +19,13 @@ jobs:
           node-version: 16
 
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install next-transpile-modules
 
       - name: Build Application
-        run: npm run build
+        run: |
+          npm run build
 
       - name: Deploy to Remote Server
         run: |
