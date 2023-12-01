@@ -32,7 +32,7 @@ jobs:
 
       - name: Debug Remote Connection
         run: |
-          ssh -i /github/workspace/${{ secrets.SSH_PRIVATE_KEY }} -o StrictHostKeyChecking=no ubuntu@212.233.77.110 "echo Debugging Remote Connection"
+          ssh -i "/github/workspace/${{ secrets.SSH_PRIVATE_KEY }}" -o StrictHostKeyChecking=no ubuntu@212.233.77.110 "echo Debugging Remote Connection"
 
       - name: Deploy to Remote Server
         run: |
