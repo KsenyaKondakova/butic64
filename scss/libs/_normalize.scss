@@ -1,9 +1,20 @@
+@font-face {
+  font-family: 'Neutral Face';
+  src: url('/public/fonts/NeutralFace.otf') format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Neutral Face';
+  src: url('/public/fonts/NeutralFace-Bold.otf') format('opentype');
+  font-weight: 700;
+}
 * {
   padding: 0;
   margin: 0;
   list-style: none;
   outline: none;
-  font-family: system-ui, Tahoma, sans-serif;
+  font-family: Neutral Face, system-ui, Tahoma, sans-serif;
   box-sizing: border-box;
 }
 
