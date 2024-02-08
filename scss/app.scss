@@ -1,48 +1,68 @@
 @import 'libs/normalize';
-
+@import 'libs/variables';
 body {
-  background-color: white;
+  background-color: $primary-white;
 }
-.logo {
-  width: 500px;
-  height: 110px;
-}
-.container {
-  padding: 100px 50px;
-  width: 100%;
-  height: 100vh;
-  background-color: #faf7ef;
+.gallery {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
   flex-direction: column;
-  align-items: center;
+  row-gap: 200px;
+}
+.main__page__container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-top: 40px;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1.7fr 1fr;
+  gap: 20px 10px;
+  grid-template-areas:
+    'news news'
+    'afisha gallery';
+}
 
-  p {
-    font-size: 40px;
-    text-align: center;
+.mySwiper {
+  height: 400px;
+  padding: 20px 0;
+  position: relative;
+  .swiper-slide {
+    width: 400px;
+
+    position: relative;
   }
-}
-@media (max-width: 620px) {
-  .logo {
-    width: 300px;
-    height: 110px;
+  .swiper-slide img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+
+    display: block; /* убеждаемся, что изображение не имеет отступы сверху и снизу */
+    margin: 0 auto;
   }
-  .container {
-    p {
-      font-size: 30px;
-    }
+  .button-prev,
+  .button-next {
+    background-color: transparent;
+    border: none;
+    width: 50px; /* Задайте желаемую ширину кнопок */
+    height: 50px; /* Задайте желаемую высоту кнопок */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%; /* Позиционирование по вертикали в центре */
+    transform: translateY(-50%);
+    z-index: 10;
   }
-}
-@media (max-width: 425px) {
-  .logo {
-    width: 250px;
-    height: 110px;
+  .button-prev {
+    left: 10px; /* Позиционирование слева */
   }
-  .container {
-    padding: 30px 10px;
-    p {
-      font-size: 25px;
-    }
+
+  .button-next {
+    right: 10px; /* Позиционирование справа */
+  }
+  .swiper-pagination {
+    transform: translateY(15px);
   }
 }
