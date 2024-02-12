@@ -1,0 +1,8 @@
+.news {
+  height: 100vh;
+  border: 1px solid #c1c1c1; /* размер и цвет границы блока */
+  overflow-y: scroll; /* прокрутка по горизонтали */
+  position: sticky;
+  max-width: 300px;
+  top: 0;
+}
