@@ -70,10 +70,7 @@ export interface StarList {
   subdescription: string;
   images?: string[];
 }
-export interface IStarState {
-  starList: StarList[];
-  starInfo: StarList;
-}
+
 export type DoubleStringArray = string[][];
 
 export interface MainCardProps {
@@ -94,7 +91,12 @@ export interface CardsProps {
   data: IPlaceList[];
 }
 
-export interface IlifeStyleState {
+export interface IPlacePageState {
   places: IPlaceList[];
   placeInfo: IPlaceList;
+}
+
+export interface IStarsState {
+  stars: StarList[];
+  starInfo: StarList;
 }

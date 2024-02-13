@@ -9,18 +9,18 @@ const initialState: IPlacePageState = {
   placeInfo: { _id: null, title: '', description: '', category: '', news: [] },
 };
 
-export const lyfeStyle = createSlice({
-  name: 'lifestyle',
+export const fashionSlice = createSlice({
+  name: 'fashion',
   initialState,
   reducers: {
-    setLyfeStylePlaces: (state, action: PayloadAction<IPlaceList[]>) => {
+    setFashionPlaces: (state, action: PayloadAction<IPlaceList[]>) => {
       state.places = action.payload;
     },
-    setPlaceInfoLifeStyle: (state, action: PayloadAction<IPlaceList>) => {
+    setFashionPlaceInfo: (state, action: PayloadAction<IPlaceList>) => {
       state.placeInfo = action.payload;
     },
   },
 });
 
-export const { setLyfeStylePlaces, setPlaceInfoLifeStyle } = lyfeStyle.actions;
-export default lyfeStyle.reducer;
+export const { setFashionPlaces, setFashionPlaceInfo } = fashionSlice.actions;
+export default fashionSlice.reducer;
