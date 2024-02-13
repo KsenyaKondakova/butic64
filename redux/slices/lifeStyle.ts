@@ -1,16 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IlifeStyleState, IPlaceState } from '@/types/placesType';
+import { IPlacePageState } from '@/types/placesType';
 
 import { IPlaceList } from '../../types/placesType';
 
-const initialState: IlifeStyleState = {
+const initialState: IPlacePageState = {
   places: [],
   placeInfo: { _id: null, title: '', description: '', category: '', news: [] },
 };
 
 export const lyfeStyle = createSlice({
-  name: 'place',
+  name: 'lifestyle',
   initialState,
   reducers: {
     setLyfeStylePlaces: (state, action: PayloadAction<IPlaceList[]>) => {
