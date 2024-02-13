@@ -10,7 +10,7 @@ const initialState: IPlacePageState = {
 };
 
 export const fashionSlice = createSlice({
-  name: 'beauty',
+  name: 'fashion',
   initialState,
   reducers: {
     setFashionPlaces: (state, action: PayloadAction<IPlaceList[]>) => {
