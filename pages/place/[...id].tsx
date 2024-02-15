@@ -3,8 +3,14 @@ import { NextRouter, useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import Layout from '@/components/Layout/Layout';
+import Nav from '@/components/Nav/Nav';
+import Slider from '@/components/Slider/Slider';
+
 import { setPlaceInfoLifeStyle } from '@/redux/slices/lifeStyle';
 import { RootState } from '@/redux/store';
+
+import styles from './Place.module.scss';
 
 const ViewPlace = () => {
   const router: NextRouter = useRouter();
@@ -19,9 +25,35 @@ const ViewPlace = () => {
     }
     axios.get('/api/getPlace?id=' + id).then((response) => {
       dispatch(setPlaceInfoLifeStyle(response.data));
+      console.log(response.data);
     });
   }, [id]);
-  return <div>{placeInfo.title}</div>;
+  return (
+    <>
+      <Nav />
+      <Layout>
+        <div className={styles.container}>
+          <div className={styles.content}>
+            <h2 className={styles.content__title}>{placeInfo.title}</h2>
+            <p
+              className={styles.content__text}
+              dangerouslySetInnerHTML={{
+                __html: placeInfo.description
+                  .split('\n') // Разбиваем текст по символу новой строки
+                  .map((line) => `<span>${line}</span>`) // Оборачиваем каждую строку в тег <span>
+                  .join('<br>'), // Объединяем строки с использованием тега <br>
+              }}
+            />
+            <div className="gallery">
+              {placeInfo?.images && placeInfo.images.length !== 0 && (
+                <Slider images={placeInfo.images} sliderIndex={1} />
+              )}
+            </div>
+          </div>
+        </div>
+      </Layout>
+    </>
+  );
 };
 
 export default ViewPlace;
