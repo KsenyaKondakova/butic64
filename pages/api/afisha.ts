@@ -1,7 +1,5 @@
 import { mongooseConnect } from '@/lib/mongoose';
-import { Category } from '@/models/Category';
-import { Place } from '@/models/Place';
-import { convertISOToCustomFormat } from '@/utils/date';
+import { Afisha } from '@/models/Afisha';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function apiHandler(
@@ -13,12 +11,9 @@ export default async function apiHandler(
     await mongooseConnect();
 
     if (method === 'GET') {
-      const placesGet = await Place.find().sort({ dateImages: -1 });
-      const places = placesGet.map((place) => ({
-        ...place._doc,
-        dateImages: convertISOToCustomFormat(place.dateImages),
-      }));
-      res.json(places);
+      const afisha = await Afisha.find();
+
+      res.json(afisha);
     }
   } catch (error) {
     console.error('Server error:', error);

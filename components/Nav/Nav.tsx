@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { NextRouter, useRouter } from 'next/router';
 import React from 'react';
+
 import styles from './Nav.module.scss';
+
 function Nav() {
   const router: NextRouter = useRouter();
   const pathname: string = router.pathname || '';
@@ -10,7 +12,7 @@ function Nav() {
     <header className={styles.header}>
       <div className={styles.header__container}>
         <Link href={'/'}>
-          <h1 className={styles.header__title}>BUTIK64</h1>
+          <h1 className={styles.header__title}>БУТИК64</h1>
         </Link>
         <nav className={styles.nav}>
           <Link href={'/stars'}>Звезды</Link>

@@ -25,10 +25,19 @@ export const placeSlice = createSlice({
           state.images.push(place.images);
         }
         if (place.afisha && place.afisha.length !== 0) {
-          state.afisha = state.afisha.concat(place.afisha);
+          state.afisha = state.afisha.concat(
+            place.afisha.map((item) => ({
+              image: item,
+              parent: place._id,
+            })),
+          );
         }
         if (place.news && place.news.length !== 0) {
-          state.news = state.news.concat(place.news);
+          state.news = state.news.concat(
+            place.news.map((item) => {
+              return { ...item, parent: place._id };
+            }),
+          );
         }
       });
     },

@@ -8,12 +8,14 @@ export interface IPlaceList {
   category: string;
   news: NewsList[];
   afisha?: string[];
+  dateImages?: string;
+  logo?: string[];
 }
 
 export interface IPlaceState {
   places: IPlaceList[];
   images: string[][];
-  afisha: string[];
+  afisha: IAfishaWithParent[];
   news: NewsList[];
 }
 export interface ICategorList {
@@ -30,7 +32,8 @@ export interface NewsList {
   _id: number | string | null;
   newsName: string;
   newsText: string;
-  parent: number | string | null;
+  parent?: number | string | null;
+  date: string;
 }
 export interface NewPlaceForm {
   placeName: string;
@@ -43,22 +46,16 @@ export interface NewCategoryForm {
   categoryName: string;
 }
 
-export interface INewsState {
-  newsList: NewsList[];
-  newsInfo: NewsList;
-}
 export interface NewNewsForm {
   newsName: string;
   newsText: string;
 }
 export interface AfishaList {
-  _id: number | string | null;
+  _id?: number | string | null;
   image: string;
+  parent?: number | string | null;
 }
-export interface IAfishaState {
-  afishaList: AfishaList[];
-  afishaInfo: AfishaList;
-}
+
 export interface NewAfishaForm {
   image: string;
 }
@@ -82,10 +79,12 @@ export interface MainCardProps {
 }
 
 export interface AfishaProps {
-  afisha: string[];
+  afisha: AfishaList[];
+  title: string;
 }
 export interface NewsProps {
   news: NewsList[];
+  title: string;
 }
 export interface CardsProps {
   data: IPlaceList[];
@@ -99,4 +98,17 @@ export interface IPlacePageState {
 export interface IStarsState {
   stars: StarList[];
   starInfo: StarList;
+}
+export interface INewsState {
+  news: NewsList[];
+  mergeNews: NewsList[];
+}
+export interface IAfishaWithParent {
+  image: string;
+  parent?: number | string | null;
+}
+
+export interface IAfishaState {
+  afisha: AfishaList[];
+  mergeAfisha: AfishaList[];
 }
