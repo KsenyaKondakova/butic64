@@ -1,18 +1,39 @@
+@import '../../scss/libs/variables';
 .afisha {
   height: 100vh;
-  border: 1px solid #c1c1c1; /* размер и цвет границы блока */
-  overflow-y: scroll; /* прокрутка по горизонтали */
+  overflow-y: scroll;
   position: sticky;
-
+  max-width: 300px;
   top: 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  align-items: center;
+  padding: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: $dark-grey $full-white;
 }
 .container {
-  width: 100%; /* Ширина области */
-  height: auto; /* Высота области */
-  margin: 0; /* Обнуляем отступы */
-
+  width: 100%;
+  height: auto;
+  margin: 0;
+  display: block;
   max-width: 300px;
+}
+.title {
+  font-size: 20px;
 }
 .image {
   width: 100%;
+}
+.afisha::-webkit-scrollbar {
+  width: 8px;
+}
+
+.afisha::-webkit-scrollbar-track {
+  background: $primary-white;
+}
+
+.afisha::-webkit-scrollbar-thumb {
+  background-color: $dark-grey;
 }
