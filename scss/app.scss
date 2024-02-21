@@ -10,6 +10,26 @@ body {
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
+  &__container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    width: 100%;
+    &__text {
+      display: flex;
+      column-gap: 10px;
+      justify-content: center;
+      align-items: center;
+      a,
+      span {
+        font-size: 14px;
+        transition: 0.3s;
+      }
+      a:hover {
+        color: $hover-color;
+      }
+    }
+  }
 }
 .main__page__container {
   display: flex;
