@@ -8,7 +8,7 @@ body {
   flex-direction: column;
   row-gap: 50px;
   width: 100%;
-  max-width: 1280px;
+  max-width: 1180px;
   margin: 0 auto;
   &__container {
     display: flex;
@@ -42,13 +42,13 @@ body {
   padding: 20px 0;
   position: relative;
   .swiper-slide {
-    width: 350px;
+    width: 320px;
 
     position: relative;
   }
   .swiper-slide img {
-    width: 350px;
-    height: 350px;
+    width: 320px;
+    height: 320px;
     object-fit: cover;
 
     display: block; /* убеждаемся, что изображение не имеет отступы сверху и снизу */
