@@ -37,17 +37,14 @@ export default function Home() {
     axios.get('/api/places').then((response) => {
       dispatch(setPlaces(response.data));
     });
-  }, []);
-  useEffect(() => {
     axios.get('/api/news').then((response) => {
       dispatch(setNews(response.data));
     });
-  }, []);
-  useEffect(() => {
     axios.get('/api/afisha').then((response) => {
       dispatch(setAfisha(response.data));
     });
   }, []);
+
   useEffect(() => {
     dispatch(setMergeNews({ placesNews, mainNews }));
   }, [placesNews, mainNews]);
@@ -60,27 +57,6 @@ export default function Home() {
       <Nav />
       <Layout>
         <div className="main__page__container">
-          {/* <MainCard
-            title={'Новости города'}
-            text={'Здесь вы найдете последние новости города'}
-            image={newsImage}
-            gridClass="news"
-            link="/news"
-          />
-          <MainCard
-            title={'Афиша города'}
-            text={'Город происходит в один клик'}
-            image={afishaImage}
-            gridClass="afisha"
-            link="/afisha"
-          />
-          <MainCard
-            title={'Галерея'}
-            text={'Визуальный праздник для глаз'}
-            image={galleryImage}
-            gridClass="gallery"
-            link="/gallery"
-          /> */}
           <News news={mergeNews} title={'Новости города'} />
           <div className="gallery">
             {places.map((place, index) => {

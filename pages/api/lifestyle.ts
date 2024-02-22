@@ -26,7 +26,7 @@ export default async function apiHandler(
       const establishments = await Place.find({
         category: { $in: categoryIds },
       });
-      res.json(establishments);
+      res.json({ establishments, subCategories });
     }
   } catch (error) {
     console.error('Server error:', error);

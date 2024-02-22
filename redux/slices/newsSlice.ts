@@ -19,11 +19,11 @@ export const newsSlice = createSlice({
       action: PayloadAction<{ placesNews: NewsList[]; mainNews: NewsList[] }>,
     ) => {
       const { placesNews, mainNews } = action.payload;
-      state.mergeNews = [...placesNews, ...mainNews];
-      state.mergeNews.sort(
+      const sortNews = [...placesNews, ...mainNews].sort(
         (a: { date: string }, b: { date: string }) =>
           new Date(b.date).getTime() - new Date(a.date).getTime(),
       );
+      state.mergeNews = sortNews;
     },
   },
 });

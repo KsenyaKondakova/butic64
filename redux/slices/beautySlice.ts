@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IPlacePageState } from '@/types/placesType';
+import { ICategorList, IPlacePageState } from '@/types/placesType';
 
 import { IPlaceList } from '../../types/placesType';
 
 const initialState: IPlacePageState = {
   places: [],
   placeInfo: { _id: null, title: '', description: '', category: '', news: [] },
+  categories: [],
 };
 
 export const beautySlice = createSlice({
@@ -19,8 +20,12 @@ export const beautySlice = createSlice({
     setBeautyPlaceInfo: (state, action: PayloadAction<IPlaceList>) => {
       state.placeInfo = action.payload;
     },
+    setBeautyCategories: (state, action: PayloadAction<ICategorList[]>) => {
+      state.categories = action.payload;
+    },
   },
 });
 
-export const { setBeautyPlaces, setBeautyPlaceInfo } = beautySlice.actions;
+export const { setBeautyPlaces, setBeautyPlaceInfo, setBeautyCategories } =
+  beautySlice.actions;
 export default beautySlice.reducer;
