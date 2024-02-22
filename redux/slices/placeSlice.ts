@@ -9,6 +9,7 @@ const initialState: IPlaceState = {
   images: [],
   afisha: [],
   news: [],
+  isLoading: true,
 };
 
 export const placeSlice = createSlice({
@@ -41,8 +42,11 @@ export const placeSlice = createSlice({
         }
       });
     },
+    setIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
   },
 });
 
-export const { setPlaces } = placeSlice.actions;
+export const { setPlaces, setIsLoading } = placeSlice.actions;
 export default placeSlice.reducer;
