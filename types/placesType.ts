@@ -17,6 +17,7 @@ export interface IPlaceState {
   images: string[][];
   afisha: IAfishaWithParent[];
   news: NewsList[];
+  isLoading: boolean;
 }
 export interface ICategorList {
   _id: number | string | null;
@@ -88,11 +89,13 @@ export interface NewsProps {
 }
 export interface CardsProps {
   data: IPlaceList[];
+  categories: ICategorList[];
 }
 
 export interface IPlacePageState {
   places: IPlaceList[];
   placeInfo: IPlaceList;
+  categories: ICategorList[];
 }
 
 export interface IStarsState {
