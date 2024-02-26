@@ -1,0 +1,26 @@
+@import '../../scss/libs/variables';
+.news__container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+.news__item {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  background-color: $light-grey;
+  padding: 20px;
+  border-radius: 10px;
+}
+.title {
+  font-size: 30px;
+  text-align: center;
+}
+.news__name {
+  font-size: 20px;
+  font-weight: bold;
+}
+.news__date {
+  font-size: 14px;
+  color: $border-color;
+}
