@@ -8,37 +8,27 @@ import styles from './Afisha.module.scss';
 
 const Afisha: React.FC<AfishaProps> = ({ afisha, title }) => {
   return (
-    <div className={styles.afisha}>
+    <div className={styles.component + ' ' + 'grid__afisha'}>
       <h3 className={styles.title}>{title}</h3>
-      {afisha.map((item, index) =>
-        item.parent ? (
-          <Link
-            href={`/place/${item.parent}`}
-            key={index}
-            className={styles.news__container}
-          >
-            <Image
-              src={item.image}
-              alt=""
-              layout="responsive"
-              objectFit="contain"
-              width={100}
-              height={100}
-            />
-          </Link>
-        ) : (
-          <div key={index} className={styles.container}>
-            <Image
-              src={item.image}
-              alt=""
-              layout="responsive"
-              objectFit="contain"
-              width={100}
-              height={100}
-            />
-          </div>
-        ),
-      )}
+      <div className={styles.afisha__container}>
+        <div className={styles.afisha}>
+          {afisha.map((item, index) =>
+            item.parent ? (
+              <Link
+                href={`/place/${item.parent}`}
+                key={index}
+                className={styles.container}
+              >
+                <img src={item.image} className={styles.image} />
+              </Link>
+            ) : (
+              <div key={index} className={styles.container}>
+                <img src={item.image} className={styles.image} />
+              </div>
+            ),
+          )}
+        </div>
+      </div>
     </div>
   );
 };
