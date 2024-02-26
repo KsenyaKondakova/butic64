@@ -83,6 +83,10 @@ export interface AfishaProps {
   afisha: AfishaList[];
   title: string;
 }
+export interface AfishaCardProps {
+  afisha: string[] | undefined;
+  title: string;
+}
 export interface NewsProps {
   news: NewsList[];
   title: string;
