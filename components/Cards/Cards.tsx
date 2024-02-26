@@ -8,7 +8,7 @@ import styles from './Cards.module.scss';
 
 const Cards: React.FC<CardsProps> = ({ data, categories }) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.container + ' ' + 'grid__cards'}>
       {data.map((obj) => {
         const category = categories.find((cat) => cat._id === obj.category);
         console.log(category);
@@ -23,6 +23,7 @@ const Cards: React.FC<CardsProps> = ({ data, categories }) => {
                   objectFit="contain"
                   width={100}
                   height={100}
+                  className={styles.image}
                 />
               </div>
               <span className={styles.category}>{category?.name}</span>
