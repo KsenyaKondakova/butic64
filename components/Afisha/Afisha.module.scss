@@ -1,0 +1,81 @@
+@import '../../scss/libs/variables';
+.component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  max-width: 300px;
+  min-width: 300px;
+  height: 100vh;
+  top: 0;
+}
+.afisha {
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  align-items: center;
+  padding: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: $dark-grey $full-white;
+}
+.container {
+  width: 100%;
+  height: auto;
+  margin: 0;
+  display: block;
+  max-width: 300px;
+}
+.title {
+  font-size: 20px;
+}
+.image {
+  width: 100%;
+}
+.afisha::-webkit-scrollbar {
+  width: 8px;
+}
+.afisha__container {
+  width: 100%;
+  overflow: hidden;
+}
+.afisha::-webkit-scrollbar-track {
+  background: $primary-white;
+}
+
+.afisha::-webkit-scrollbar-thumb {
+  background-color: $dark-grey;
+}
+@media (max-width: 1350px) {
+  .afisha {
+    overflow-y: hidden;
+    overflow-x: scroll;
+
+    column-gap: 10px;
+    flex-direction: row;
+    padding: 0px;
+  }
+  .component {
+    row-gap: 10px;
+    height: 200px;
+    max-width: 100vw;
+  }
+  .container {
+    width: auto;
+    height: 180px;
+    max-width: none;
+  }
+  .image {
+    height: 100%;
+    width: auto;
+  }
+  .component {
+    align-items: start;
+  }
+  .title {
+    width: 100%;
+    text-align: center;
+  }
+}

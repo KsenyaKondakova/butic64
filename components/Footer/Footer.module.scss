@@ -1,0 +1,26 @@
+@import '../../scss/libs/variables';
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 20px;
+  padding: 30px 0;
+  background-color: $dark-grey;
+  &__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    column-gap: 60px;
+    a {
+      font-size: 12px;
+      color: $full-white;
+    }
+  }
+  &__copy {
+    font-size: 12px;
+    color: $full-white;
+  }
+}

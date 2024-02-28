@@ -1,0 +1,160 @@
+@import '../../scss/libs/variables';
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+  background-color: $dark-grey;
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 1440px;
+    width: 100%;
+    row-gap: 30px;
+  }
+  &__title {
+    color: $full-white;
+    font-size: 96px;
+    font-weight: 400;
+    cursor: pointer;
+    line-height: 96px;
+  }
+}
+.nav {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  column-gap: 45px;
+  font-size: 20px;
+  a {
+    color: $full-white;
+    transition: color 0.1s ease-in-out;
+    cursor: pointer;
+  }
+  a:hover {
+    color: $hover-color;
+  }
+}
+.header__container__mobile {
+  position: fixed;
+  width: 100%;
+  height: 80px;
+  z-index: 50;
+  background-color: $dark-grey;
+
+  align-items: center;
+  display: none;
+}
+.menu__mobile {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 80px;
+  left: 0;
+  &__blur {
+    width: 100vw;
+    height: 100vh;
+    left: 30%;
+    backdrop-filter: blur(2px);
+    position: absolute;
+  }
+  transform: translateX(-200%);
+  transition: all 0.2s;
+}
+.menu__mobile.active {
+  transform: translateX(0);
+}
+.nav__mobile {
+  width: 30%;
+  height: 100%;
+  background-color: $dark-grey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.4s;
+  row-gap: 20px;
+  padding-top: 20px;
+  a {
+    color: $full-white;
+  }
+}
+.menu__mobile__btn__container {
+  position: absolute;
+  top: 20px;
+  left: 0;
+}
+.menu__mobile__btn {
+  width: 30px;
+  height: 30px;
+  margin-left: 20px;
+  position: relative;
+}
+.menu__mobile__btn span {
+  position: absolute;
+  top: 14px;
+  width: 30px;
+  background-color: $primary-white;
+  height: 2px;
+}
+.menu__mobile__btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 30px;
+  background-color: $primary-white;
+  height: 2px;
+}
+.menu__mobile__btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 30px;
+  background-color: $primary-white;
+  height: 2px;
+}
+.header__title__mobile {
+  color: $full-white;
+  font-size: 40px;
+  font-weight: 400;
+  cursor: pointer;
+  line-height: 96px;
+}
+.header__title__mobile__link {
+  display: block;
+  width: fit-content;
+}
+@media (max-width: 1030px) {
+  .header {
+    padding: 10px 0;
+    height: 80px;
+    &__container {
+      display: none;
+    }
+  }
+  .header__container__mobile {
+    display: flex;
+    justify-content: center;
+  }
+}
+@media (max-width: 820px) {
+  .menu__mobile {
+    &__blur {
+      left: 50%;
+    }
+  }
+  .nav__mobile {
+    width: 50%;
+  }
+}
+@media (max-width: 540px) {
+  .menu__mobile {
+    &__blur {
+      left: 100%;
+    }
+  }
+  .nav__mobile {
+    width: 100%;
+  }
+}

@@ -1,25 +1,29 @@
 import axios from 'axios';
-import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Afisha from '@/components/Afisha/Afisha';
-import Banner from '@/components/Banner/Banner';
+import Cards from '@/components/Cards/Cards';
 import { Footer } from '@/components/Footer/Footer';
 import Layout from '@/components/Layout/Layout';
 import Nav from '@/components/Nav/Nav';
 import News from '@/components/News/News';
-import Slider from '@/components/Slider/Slider';
 
 import { setAfisha, setMergeAfisha } from '@/redux/slices/afishaSlice';
+import {
+  setLyfeStyleCategories,
+  setLyfeStylePlaces,
+} from '@/redux/slices/lifeStyle';
 import { setMergeNews, setNews } from '@/redux/slices/newsSlice';
 import { setPlaces } from '@/redux/slices/placeSlice';
 import { RootState } from '@/redux/store';
 
-export default function Home() {
+function Lifestyle() {
   const dispatch = useDispatch();
-
-  const places = useSelector((state: RootState) => state.placeSlice.places);
+  const places = useSelector((state: RootState) => state.lifeStyle.places);
+  const categories = useSelector(
+    (state: RootState) => state.lifeStyle.categories,
+  );
   const placesNews = useSelector((state: RootState) => state.placeSlice.news);
   const placesAfisha = useSelector(
     (state: RootState) => state.placeSlice.afisha,
@@ -34,6 +38,7 @@ export default function Home() {
   const mergeAfisha = useSelector(
     (state: RootState) => state.afishaSlice.mergeAfisha,
   );
+
   useEffect(() => {
     axios.get('/api/places').then((response) => {
       dispatch(setPlaces(response.data));
@@ -44,6 +49,10 @@ export default function Home() {
     axios.get('/api/afisha').then((response) => {
       dispatch(setAfisha(response.data));
     });
+    axios.get('/api/lifestyle').then((response) => {
+      dispatch(setLyfeStylePlaces(response.data.establishments));
+      dispatch(setLyfeStyleCategories(response.data.subCategories));
+    });
   }, []);
 
   useEffect(() => {
@@ -52,34 +61,14 @@ export default function Home() {
   useEffect(() => {
     dispatch(setMergeAfisha({ placesAfisha, mainAfisha }));
   }, [placesAfisha, mainAfisha]);
-  console.log(mergeNews);
+
   return (
     <>
       <Nav />
       <Layout>
-        <div className="main__page__container__index">
+        <div className="main__page__container">
           <News news={mergeNews} title={'Новости города'} />
-          <div className="gallery">
-            {places.map((place, index) => {
-              if (place.images && place.images.length > 0) {
-                return (
-                  <div key={place._id} className="gallery__container">
-                    <Slider
-                      key={index}
-                      images={place.images}
-                      sliderIndex={index}
-                    />
-                    <div className="gallery__container__text">
-                      <Link href={`/place/${place._id}`}>{place.title}</Link>
-                      <span>{place.dateImages}</span>
-                    </div>
-                  </div>
-                );
-              } else {
-                return null;
-              }
-            })}
-          </div>
+          <Cards data={places} categories={categories} />
           <Afisha afisha={mergeAfisha} title={'Афиша города'} />
         </div>
         <Footer />
@@ -87,3 +76,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Lifestyle;

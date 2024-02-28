@@ -1,0 +1,18 @@
+@import '../../scss/libs/variables';
+.banner {
+  background:
+    linear-gradient($image-cover, $image-cover),
+    url('../../public/assets/images/snow-covered-mountains-in-northern-india\ 1.jpeg')
+      center/cover no-repeat;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__title {
+    font-size: 96px;
+    font-weight: 400;
+    text-align: center;
+    color: $full-white;
+  }
+}
