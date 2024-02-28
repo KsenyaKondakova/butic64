@@ -49,10 +49,11 @@ const News: React.FC<NewsProps> = ({ news, title }) => {
   );
 
   return (
-    <div className={styles.news}>
+    <div className={styles.component + ' ' + 'grid__news'}>
       <h3 className={styles.title}>{title}</h3>
-
-      {loading ? skeletons : newsItems}
+      <div className={styles.news__container_overflow}>
+        <div className={styles.news}> {loading ? skeletons : newsItems}</div>
+      </div>
     </div>
   );
 };

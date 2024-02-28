@@ -27,17 +27,17 @@ const Slider: React.FC<SliderProps> = ({ images, sliderIndex }) => {
         }}
         className={'mySwiper ' + sliderIndex}
         breakpoints={{
-          320: {
-            slidesPerView: 2,
+          780: {
+            slidesPerView: 1,
             spaceBetween: 20,
           },
 
-          480: {
-            slidesPerView: 3,
-            spaceBetween: 30,
+          900: {
+            slidesPerView: 2,
+            spaceBetween: 10,
           },
 
-          1440: {
+          1740: {
             slidesPerView: 3,
             spaceBetween: 10,
           },

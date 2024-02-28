@@ -3,8 +3,11 @@ import { NextRouter, useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { AfishaCard } from '@/components/AfishaCard/AfishaCard';
+import { Footer } from '@/components/Footer/Footer';
 import Layout from '@/components/Layout/Layout';
 import Nav from '@/components/Nav/Nav';
+import { NewsCard } from '@/components/NewsCard/NewsCard';
 import Slider from '@/components/Slider/Slider';
 
 import { setPlaceInfoLifeStyle } from '@/redux/slices/lifeStyle';
@@ -49,8 +52,11 @@ const ViewPlace = () => {
                 <Slider images={placeInfo.images} sliderIndex={1} />
               )}
             </div>
+            <NewsCard news={placeInfo.news} title="Новости" />
+            <AfishaCard afisha={placeInfo.afisha} title="Афиша" />
           </div>
         </div>
+        <Footer />
       </Layout>
     </>
   );

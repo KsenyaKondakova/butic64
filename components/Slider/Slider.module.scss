@@ -4,3 +4,8 @@
 .slider {
   height: 300px;
 }
+@media (max-width: 420px) {
+  .container {
+    height: 200px;
+  }
+}

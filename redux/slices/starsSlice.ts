@@ -10,6 +10,15 @@ const initialState: IStarsState = {
     secondName: '',
     description: '',
     subdescription: '',
+    orderStar: '',
+  },
+  viewStar: {
+    _id: null,
+    name: '',
+    secondName: '',
+    description: '',
+    subdescription: '',
+    orderStar: '',
   },
 };
 
@@ -18,13 +27,18 @@ export const starsSlice = createSlice({
   initialState,
   reducers: {
     setStars: (state, action: PayloadAction<StarList[]>) => {
-      state.stars = action.payload;
+      state.stars = action.payload.sort(
+        (a, b) => Number(a.orderStar) - Number(b.orderStar),
+      );
     },
     setStar: (state, action: PayloadAction<StarList>) => {
       state.starInfo = action.payload;
     },
+    setViewStar: (state, action: PayloadAction<StarList>) => {
+      state.viewStar = action.payload;
+    },
   },
 });
 
-export const { setStars, setStar } = starsSlice.actions;
+export const { setStars, setStar, setViewStar } = starsSlice.actions;
 export default starsSlice.reducer;

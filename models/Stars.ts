@@ -1,4 +1,5 @@
-import mongoose, { Schema, model, models } from 'mongoose';
+import mongoose, { model, models, Schema } from 'mongoose';
+
 import { StarList } from '../types/placesType';
 
 const starSchema = new Schema<StarList>({
@@ -8,6 +9,7 @@ const starSchema = new Schema<StarList>({
   description: { type: String },
   subdescription: { type: String },
   images: [{ type: String }],
+  orderStar: { type: String, required: true },
 });
 
 export const Star = models?.Star || model('Star', starSchema);

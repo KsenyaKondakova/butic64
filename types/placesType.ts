@@ -67,6 +67,7 @@ export interface StarList {
   description: string;
   subdescription: string;
   images?: string[];
+  orderStar: string;
 }
 
 export type DoubleStringArray = string[][];
@@ -81,6 +82,10 @@ export interface MainCardProps {
 
 export interface AfishaProps {
   afisha: AfishaList[];
+  title: string;
+}
+export interface AfishaCardProps {
+  afisha: string[] | undefined;
   title: string;
 }
 export interface NewsProps {
@@ -101,6 +106,7 @@ export interface IPlacePageState {
 export interface IStarsState {
   stars: StarList[];
   starInfo: StarList;
+  viewStar: StarList;
 }
 export interface INewsState {
   news: NewsList[];
