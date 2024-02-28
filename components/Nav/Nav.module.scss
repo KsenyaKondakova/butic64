@@ -74,6 +74,11 @@
   flex-direction: column;
   align-items: center;
   transition: all 0.4s;
+  row-gap: 20px;
+  padding-top: 20px;
+  a {
+    color: $full-white;
+  }
 }
 .menu__mobile__btn__container {
   position: absolute;

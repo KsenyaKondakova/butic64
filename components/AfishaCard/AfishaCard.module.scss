@@ -13,13 +13,14 @@
 }
 
 .grid__container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
+  justify-content: center;
 }
 
 .image__container {
-  width: 100%;
+  width: 45%;
   height: fit-content;
 }
 
@@ -27,4 +28,9 @@
   width: 100%;
   height: auto;
   display: block;
+}
+@media (max-width: 780px) {
+  .grid__container {
+    grid-template-columns: 1fr;
+  }
 }
