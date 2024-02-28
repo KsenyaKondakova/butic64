@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Afisha from '@/components/Afisha/Afisha';
 import Banner from '@/components/Banner/Banner';
+import { Footer } from '@/components/Footer/Footer';
 import Layout from '@/components/Layout/Layout';
 import Nav from '@/components/Nav/Nav';
 import News from '@/components/News/News';
@@ -56,7 +57,7 @@ export default function Home() {
     <>
       <Nav />
       <Layout>
-        <div className="main__page__container">
+        <div className="main__page__container__index">
           <News news={mergeNews} title={'Новости города'} />
           <div className="gallery">
             {places.map((place, index) => {
@@ -81,7 +82,7 @@ export default function Home() {
           </div>
           <Afisha afisha={mergeAfisha} title={'Афиша города'} />
         </div>
-        <Banner />
+        <Footer />
       </Layout>
     </>
   );

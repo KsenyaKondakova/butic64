@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Afisha from '@/components/Afisha/Afisha';
 import Cards from '@/components/Cards/Cards';
+import { Footer } from '@/components/Footer/Footer';
 import Layout from '@/components/Layout/Layout';
 import Nav from '@/components/Nav/Nav';
 import News from '@/components/News/News';
@@ -67,6 +68,7 @@ function Lifestyle() {
           <Cards data={places} categories={categories} />
           <Afisha afisha={mergeAfisha} title={'Афиша города'} />
         </div>
+        <Footer />
       </Layout>
     </>
   );

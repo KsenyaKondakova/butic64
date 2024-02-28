@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AfishaCard } from '@/components/AfishaCard/AfishaCard';
+import { Footer } from '@/components/Footer/Footer';
 import Layout from '@/components/Layout/Layout';
 import Nav from '@/components/Nav/Nav';
 import { NewsCard } from '@/components/NewsCard/NewsCard';
@@ -55,6 +56,7 @@ const ViewPlace = () => {
             <AfishaCard afisha={placeInfo.afisha} title="Афиша" />
           </div>
         </div>
+        <Footer />
       </Layout>
     </>
   );
