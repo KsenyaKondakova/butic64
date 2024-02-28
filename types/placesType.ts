@@ -67,6 +67,7 @@ export interface StarList {
   description: string;
   subdescription: string;
   images?: string[];
+  orderStar: string;
 }
 
 export type DoubleStringArray = string[][];
@@ -105,6 +106,7 @@ export interface IPlacePageState {
 export interface IStarsState {
   stars: StarList[];
   starInfo: StarList;
+  viewStar: StarList;
 }
 export interface INewsState {
   news: NewsList[];
