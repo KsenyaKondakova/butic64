@@ -16,17 +16,19 @@ const Cards: React.FC<CardsProps> = ({ data, categories }) => {
           <article key={obj._id} className={styles.article}>
             <Link href={'/place/' + obj._id} className={styles.link}>
               <div className={styles.image__container}>
-                <Image
-                  src={obj.logo && obj.logo[0] ? obj.logo[0] : ''}
-                  alt=""
-                  layout="responsive"
-                  objectFit="contain"
-                  width={100}
-                  height={100}
-                  className={styles.image}
-                />
+                {obj.logo && obj.logo[0] && (
+                  <Image
+                    src={obj.logo && obj.logo[0] ? obj.logo[0] : ''}
+                    alt=""
+                    layout="responsive"
+                    objectFit="contain"
+                    width={100}
+                    height={100}
+                    className={styles.image}
+                  />
+                )}
               </div>
-              <span className={styles.category}>{category?.name}</span>
+              <span className={styles.category}>{obj.title}</span>
             </Link>
           </article>
         );

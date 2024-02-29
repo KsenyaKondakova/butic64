@@ -64,14 +64,17 @@ body {
   position: relative;
   .swiper-slide {
     width: 320px;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
+    overflow: hidden;
   }
-  .swiper-slide img {
-    width: 320px;
-    height: 320px;
-    object-fit: cover;
 
+  .swiper-slide img {
+    height: 100%;
+
+    object-fit: cover;
     display: block; /* убеждаемся, что изображение не имеет отступы сверху и снизу */
     margin: 0 auto;
   }
