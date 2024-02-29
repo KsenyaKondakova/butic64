@@ -9,6 +9,7 @@ import {
 const initialState: IAfishaState = {
   afisha: [],
   mergeAfisha: [],
+  modalAfisha: { _id: '', image: '' },
 };
 
 export const afishaSlice = createSlice({
@@ -28,8 +29,12 @@ export const afishaSlice = createSlice({
       const { placesAfisha, mainAfisha } = action.payload;
       state.mergeAfisha = [...placesAfisha, ...mainAfisha];
     },
+    setModalAfisha: (state, action: PayloadAction<AfishaList>) => {
+      state.modalAfisha = action.payload;
+    },
   },
 });
 
-export const { setAfisha, setMergeAfisha } = afishaSlice.actions;
+export const { setAfisha, setMergeAfisha, setModalAfisha } =
+  afishaSlice.actions;
 export default afishaSlice.reducer;

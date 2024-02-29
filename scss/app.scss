@@ -108,6 +108,7 @@ body {
   max-width: 1180px;
   margin: 0 auto;
   grid-area: cards;
+  padding-bottom: 20px;
   &__title {
     font-size: 30px;
     text-align: center;
@@ -132,6 +133,7 @@ body {
       display: flex;
       flex-direction: column;
       align-items: center;
+      row-gap: 10px;
       cursor: pointer;
       &__container {
         width: 100%;
@@ -142,6 +144,11 @@ body {
         width: 100%;
         height: auto;
         object-fit: contain;
+      }
+      &__name {
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
   }
@@ -165,6 +172,26 @@ body {
       text-decoration: underline;
     }
   }
+}
+.modal__newsName {
+  font-size: 20px;
+  font-weight: bold;
+  text-indent: 20px;
+}
+.modal__newsDate {
+  font-size: 14px;
+  color: $border-color;
+  text-indent: 20px;
+}
+.modal__newsText {
+  span {
+    display: block;
+    text-indent: 20px; // Отступ красной строки
+  }
+}
+.modal__afisha {
+  height: 100%;
+  object-fit: contain;
 }
 @media (max-width: 1850px) {
   .main__page__container__index {

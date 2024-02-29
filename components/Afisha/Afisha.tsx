@@ -1,12 +1,26 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import { AfishaProps } from '@/types/placesType';
+import { setModalAfisha } from '@/redux/slices/afishaSlice';
+
+import { AfishaList, AfishaProps } from '@/types/placesType';
 
 import styles from './Afisha.module.scss';
 
-const Afisha: React.FC<AfishaProps> = ({ afisha, title }) => {
+const Afisha: React.FC<AfishaProps> = ({
+  afisha,
+  title,
+  setModalActive,
+  setModalNewsOrImage,
+}) => {
+  const dispatch = useDispatch();
+  const handleClickAfisha = (afisha: AfishaList) => {
+    setModalNewsOrImage(false);
+    dispatch(setModalAfisha(afisha));
+    setModalActive(true);
+  };
   return (
     <div className={styles.component + ' ' + 'grid__afisha'}>
       <h3 className={styles.title}>{title}</h3>
@@ -22,7 +36,11 @@ const Afisha: React.FC<AfishaProps> = ({ afisha, title }) => {
                 <img src={item.image} className={styles.image} />
               </Link>
             ) : (
-              <div key={index} className={styles.container}>
+              <div
+                key={index}
+                className={styles.container}
+                onClick={() => handleClickAfisha(item)}
+              >
                 <img src={item.image} className={styles.image} />
               </div>
             ),

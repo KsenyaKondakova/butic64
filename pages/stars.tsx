@@ -1,12 +1,14 @@
+import { convertISOToCustomFormat } from '@/utils/date';
 import axios from 'axios';
 import Image from 'next/image';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Afisha from '@/components/Afisha/Afisha';
 import Cards from '@/components/Cards/Cards';
 import { Footer } from '@/components/Footer/Footer';
 import Layout from '@/components/Layout/Layout';
+import { Modal } from '@/components/Modal/Modal';
 import Nav from '@/components/Nav/Nav';
 import News from '@/components/News/News';
 import Slider from '@/components/Slider/Slider';
@@ -37,7 +39,14 @@ const Stars = () => {
     (state: RootState) => state.afishaSlice.mergeAfisha,
   );
   const viewStar = useSelector((state: RootState) => state.starsSlice.viewStar);
-
+  const [modalActive, setModalActive] = useState<boolean>(false);
+  const modalNews = useSelector(
+    (state: RootState) => state.newsSlice.modalNews,
+  );
+  const modalAfisha = useSelector(
+    (state: RootState) => state.afishaSlice.modalAfisha,
+  );
+  const [modalNewsOrImage, setModalNewsOrImage] = useState<boolean>(false);
   const handleClickStar = (star: StarList) => {
     dispatch(setViewStar(star));
   };
@@ -71,7 +80,12 @@ const Stars = () => {
       <Nav />
       <Layout>
         <div className="main__page__container__index">
-          <News news={mergeNews} title={'Новости города'} />
+          <News
+            news={mergeNews}
+            title={'Новости города'}
+            setModalActive={setModalActive}
+            setModalNewsOrImage={setModalNewsOrImage}
+          />
           {viewStar && (
             <article className="stars">
               <h2 className="stars__title">
@@ -123,15 +137,44 @@ const Stars = () => {
                       )}
                     </div>
 
-                    <span>{obj.name}</span>
+                    <p className="stars__list__item__name">
+                      <span>{obj.name}</span>&nbsp;{' '}
+                      <span>{obj.secondName}</span>
+                    </p>
                   </div>
                 ))}
               </div>
             </article>
           )}
-          <Afisha afisha={mergeAfisha} title={'Афиша города'} />
+          <Afisha
+            afisha={mergeAfisha}
+            title={'Афиша города'}
+            setModalActive={setModalActive}
+            setModalNewsOrImage={setModalNewsOrImage}
+          />
         </div>
         <Footer />
+        <Modal modalActive={modalActive} setModalActive={setModalActive}>
+          {modalNewsOrImage ? (
+            <>
+              <span className="modal__newsName">{modalNews.newsName}</span>
+              <p
+                className="modal__newsText"
+                dangerouslySetInnerHTML={{
+                  __html: modalNews.newsText
+                    .split('\n') // Разбиваем текст по символу новой строки
+                    .map((line) => `<span>${line}</span>`) // Оборачиваем каждую строку в тег <span>
+                    .join('<br>'), // Объединяем строки с использованием тега <br>
+                }}
+              />
+              <span className="modal__newsDate">
+                {convertISOToCustomFormat(modalNews.date)}
+              </span>
+            </>
+          ) : (
+            <img className="modal__afisha" src={modalAfisha.image} alt="f" />
+          )}
+        </Modal>
       </Layout>
     </>
   );

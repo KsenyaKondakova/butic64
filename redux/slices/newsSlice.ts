@@ -5,6 +5,12 @@ import { INewsState, NewsList } from '@/types/placesType';
 const initialState: INewsState = {
   news: [],
   mergeNews: [],
+  modalNews: {
+    _id: '',
+    newsName: '',
+    newsText: '',
+    date: '',
+  },
 };
 
 export const newsSlice = createSlice({
@@ -25,8 +31,11 @@ export const newsSlice = createSlice({
       );
       state.mergeNews = sortNews;
     },
+    setModalNews: (state, action: PayloadAction<NewsList>) => {
+      state.modalNews = action.payload;
+    },
   },
 });
 
-export const { setNews, setMergeNews } = newsSlice.actions;
+export const { setNews, setMergeNews, setModalNews } = newsSlice.actions;
 export default newsSlice.reducer;
