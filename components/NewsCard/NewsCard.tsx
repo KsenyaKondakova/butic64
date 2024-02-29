@@ -1,11 +1,11 @@
 import { convertISOToCustomFormat } from '@/utils/date';
 import React from 'react';
 
-import { NewsProps } from '@/types/placesType';
+import { NewsCardProps } from '@/types/placesType';
 
 import styles from './NewsCard.module.scss';
 
-export const NewsCard: React.FC<NewsProps> = ({ news, title }) => {
+export const NewsCard: React.FC<NewsCardProps> = ({ news, title }) => {
   return (
     <div className={styles.news__container}>
       <h3 className={styles.title}>{title}</h3>

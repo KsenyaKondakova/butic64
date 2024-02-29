@@ -52,8 +52,12 @@ const ViewPlace = () => {
                 <Slider images={placeInfo.images} sliderIndex={1} />
               )}
             </div>
-            <NewsCard news={placeInfo.news} title="Новости" />
-            <AfishaCard afisha={placeInfo.afisha} title="Афиша" />
+            {placeInfo.news.length !== 0 && (
+              <NewsCard news={placeInfo.news} title="Новости" />
+            )}
+            {placeInfo.afisha?.length !== 0 && (
+              <AfishaCard afisha={placeInfo.afisha} title="Афиша" />
+            )}
           </div>
         </div>
         <Footer />

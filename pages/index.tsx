@@ -1,12 +1,14 @@
+import { convertISOToCustomFormat } from '@/utils/date';
 import axios from 'axios';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Afisha from '@/components/Afisha/Afisha';
 import Banner from '@/components/Banner/Banner';
 import { Footer } from '@/components/Footer/Footer';
 import Layout from '@/components/Layout/Layout';
+import { Modal } from '@/components/Modal/Modal';
 import Nav from '@/components/Nav/Nav';
 import News from '@/components/News/News';
 import Slider from '@/components/Slider/Slider';
@@ -34,6 +36,14 @@ export default function Home() {
   const mergeAfisha = useSelector(
     (state: RootState) => state.afishaSlice.mergeAfisha,
   );
+  const [modalActive, setModalActive] = useState<boolean>(false);
+  const modalNews = useSelector(
+    (state: RootState) => state.newsSlice.modalNews,
+  );
+  const modalAfisha = useSelector(
+    (state: RootState) => state.afishaSlice.modalAfisha,
+  );
+  const [modalNewsOrImage, setModalNewsOrImage] = useState<boolean>(false);
   useEffect(() => {
     axios.get('/api/places').then((response) => {
       dispatch(setPlaces(response.data));
@@ -58,7 +68,12 @@ export default function Home() {
       <Nav />
       <Layout>
         <div className="main__page__container__index">
-          <News news={mergeNews} title={'Новости города'} />
+          <News
+            news={mergeNews}
+            title={'Новости города'}
+            setModalActive={setModalActive}
+            setModalNewsOrImage={setModalNewsOrImage}
+          />
           <div className="gallery">
             {places.map((place, index) => {
               if (place.images && place.images.length > 0) {
@@ -80,9 +95,35 @@ export default function Home() {
               }
             })}
           </div>
-          <Afisha afisha={mergeAfisha} title={'Афиша города'} />
+          <Afisha
+            afisha={mergeAfisha}
+            title={'Афиша города'}
+            setModalActive={setModalActive}
+            setModalNewsOrImage={setModalNewsOrImage}
+          />
         </div>
         <Footer />
+        <Modal modalActive={modalActive} setModalActive={setModalActive}>
+          {modalNewsOrImage ? (
+            <>
+              <span className="modal__newsName">{modalNews.newsName}</span>
+              <p
+                className="modal__newsText"
+                dangerouslySetInnerHTML={{
+                  __html: modalNews.newsText
+                    .split('\n') // Разбиваем текст по символу новой строки
+                    .map((line) => `<span>${line}</span>`) // Оборачиваем каждую строку в тег <span>
+                    .join('<br>'), // Объединяем строки с использованием тега <br>
+                }}
+              />
+              <span className="modal__newsDate">
+                {convertISOToCustomFormat(modalNews.date)}
+              </span>
+            </>
+          ) : (
+            <img className="modal__afisha" src={modalAfisha.image} alt="f" />
+          )}
+        </Modal>
       </Layout>
     </>
   );
