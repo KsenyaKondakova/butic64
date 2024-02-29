@@ -83,12 +83,20 @@ export interface MainCardProps {
 export interface AfishaProps {
   afisha: AfishaList[];
   title: string;
+  setModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalNewsOrImage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export interface AfishaCardProps {
   afisha: string[] | undefined;
   title: string;
 }
 export interface NewsProps {
+  news: NewsList[];
+  title: string;
+  setModalActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalNewsOrImage: React.Dispatch<React.SetStateAction<boolean>>;
+}
+export interface NewsCardProps {
   news: NewsList[];
   title: string;
 }
@@ -111,6 +119,7 @@ export interface IStarsState {
 export interface INewsState {
   news: NewsList[];
   mergeNews: NewsList[];
+  modalNews: NewsList;
 }
 export interface IAfishaWithParent {
   image: string;
@@ -120,4 +129,5 @@ export interface IAfishaWithParent {
 export interface IAfishaState {
   afisha: AfishaList[];
   mergeAfisha: AfishaList[];
+  modalAfisha: AfishaList;
 }
