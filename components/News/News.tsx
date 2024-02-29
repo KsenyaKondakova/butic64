@@ -3,15 +3,21 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { setModalNews } from '@/redux/slices/newsSlice';
 import { setIsLoading } from '@/redux/slices/placeSlice';
 import { RootState } from '@/redux/store';
 
-import { NewsProps } from '@/types/placesType';
+import { NewsList, NewsProps } from '@/types/placesType';
 
 import styles from './News.module.scss';
 import Skeleton from './Skeleton';
 
-const News: React.FC<NewsProps> = ({ news, title }) => {
+const News: React.FC<NewsProps> = ({
+  news,
+  title,
+  setModalActive,
+  setModalNewsOrImage,
+}) => {
   const dispatch = useDispatch();
   const loading = useSelector((state: RootState) => state.placeSlice.isLoading);
 
@@ -22,6 +28,11 @@ const News: React.FC<NewsProps> = ({ news, title }) => {
     }
   }, [news]);
 
+  const handleClickNews = (news: NewsList) => {
+    setModalNewsOrImage(true);
+    dispatch(setModalNews(news));
+    setModalActive(true);
+  };
   const skeletons = [...new Array(8)].map((_, index) => (
     <Skeleton key={index} />
   ));
@@ -39,7 +50,11 @@ const News: React.FC<NewsProps> = ({ news, title }) => {
         </span>
       </Link>
     ) : (
-      <div key={obj._id} className={styles.news__container}>
+      <div
+        key={obj._id}
+        className={styles.news__container}
+        onClick={() => handleClickNews(obj)}
+      >
         <p className={styles.news__name}>{obj.newsName}</p>
         <span className={styles.news__date}>
           {convertISOToCustomFormat(obj.date)}
