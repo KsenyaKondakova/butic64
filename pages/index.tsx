@@ -86,7 +86,11 @@ export default function Home() {
                     />
                     <div className="gallery__container__text">
                       <Link href={`/place/${place._id}`}>{place.title}</Link>
-                      <span>{place.dateImages}</span>
+                      {place.dateImages !== 'NaN.NaN.NaN' ? (
+                        <span>{place.dateImages}</span>
+                      ) : (
+                        ''
+                      )}
                     </div>
                   </div>
                 );
