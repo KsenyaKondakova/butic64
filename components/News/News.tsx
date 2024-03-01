@@ -67,7 +67,7 @@ const News: React.FC<NewsProps> = ({
     <div className={styles.component + ' ' + 'grid__news'}>
       <h3 className={styles.title}>{title}</h3>
       <div className={styles.news__container_overflow}>
-        <div className={styles.news}> {loading ? skeletons : newsItems}</div>
+        <div className={styles.news}> {newsItems}</div>
       </div>
     </div>
   );
