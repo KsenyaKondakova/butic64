@@ -86,66 +86,70 @@ const Stars = () => {
             setModalActive={setModalActive}
             setModalNewsOrImage={setModalNewsOrImage}
           />
-          {viewStar && (
-            <article className="stars">
-              <h2 className="stars__title">
-                {viewStar.name}&nbsp;
-                {viewStar.secondName}
-              </h2>
-              <Slider
-                images={viewStar.images ? viewStar.images : []}
-                sliderIndex={1}
-              />
-              {viewStar.description && (
-                <p
-                  className="stars__text"
-                  dangerouslySetInnerHTML={{
-                    __html: viewStar.description
-                      .split('\n')
-                      .map((line) => `<span>${line}</span>`)
-                      .join('<br>'),
-                  }}
-                />
-              )}
-              {viewStar.subdescription && (
-                <p
-                  className="stars__text"
-                  dangerouslySetInnerHTML={{
-                    __html: viewStar.subdescription
-                      .split('\n')
-                      .map((line) => `<span>${line}</span>`)
-                      .join('<br>'),
-                  }}
-                />
-              )}
-              <div className="stars__list">
-                {stars.map((obj) => (
-                  <div
-                    key={obj._id}
-                    className="stars__list__item"
-                    onClick={() => handleClickStar(obj)}
-                  >
-                    <div className="stars__list__item__container">
-                      {obj.images && (
-                        <Image
-                          src={obj.images[0]}
-                          alt={obj.name}
-                          layout="fill"
-                          objectFit="cover"
-                          className="stars__list__item__img"
-                        />
-                      )}
-                    </div>
 
-                    <p className="stars__list__item__name">
-                      <span>{obj.name}</span>&nbsp;{' '}
-                      <span>{obj.secondName}</span>
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </article>
-          )}
+          <article className="stars">
+            {viewStar && (
+              <>
+                <h2 className="stars__title">
+                  {viewStar.name}&nbsp;
+                  {viewStar.secondName}
+                </h2>
+                <Slider
+                  images={viewStar.images ? viewStar.images : []}
+                  sliderIndex={1}
+                />
+                {viewStar.description && (
+                  <p
+                    className="stars__text"
+                    dangerouslySetInnerHTML={{
+                      __html: viewStar.description
+                        .split('\n')
+                        .map((line) => `<span>${line}</span>`)
+                        .join('<br>'),
+                    }}
+                  />
+                )}
+                {viewStar.subdescription && (
+                  <p
+                    className="stars__text"
+                    dangerouslySetInnerHTML={{
+                      __html: viewStar.subdescription
+                        .split('\n')
+                        .map((line) => `<span>${line}</span>`)
+                        .join('<br>'),
+                    }}
+                  />
+                )}
+                <div className="stars__list">
+                  {stars.map((obj) => (
+                    <div
+                      key={obj._id}
+                      className="stars__list__item"
+                      onClick={() => handleClickStar(obj)}
+                    >
+                      <div className="stars__list__item__container">
+                        {obj.images && (
+                          <Image
+                            src={obj.images[0]}
+                            alt={obj.name}
+                            layout="fill"
+                            objectFit="cover"
+                            className="stars__list__item__img"
+                          />
+                        )}
+                      </div>
+
+                      <p className="stars__list__item__name">
+                        <span>{obj.name}</span>&nbsp;{' '}
+                        <span>{obj.secondName}</span>
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+          </article>
+
           <Afisha
             afisha={mergeAfisha}
             title={'Афиша города'}
