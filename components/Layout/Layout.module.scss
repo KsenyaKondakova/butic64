@@ -4,7 +4,29 @@
   min-height: 100vh;
   max-width: 1920px;
   margin: 0 auto;
+
   &__children {
     flex: 1;
+  }
+}
+.main__page__container {
+  padding: 30px;
+  padding-left: 0;
+  padding-right: 0;
+  column-gap: 30px;
+  min-height: 100vh;
+  justify-content: center;
+  row-gap: 10px;
+  display: flex;
+  width: 100%;
+  max-width: 1920px;
+}
+@media (max-width: 1030px) {
+  .main__page__container {
+    flex-direction: column;
+    justify-content: start;
+  }
+  .layout {
+    padding: 0 10px;
   }
 }

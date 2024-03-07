@@ -65,7 +65,14 @@
   width: 100%;
   overflow: hidden;
 }
-@media (max-width: 1350px) {
+@media (max-width: 1600px) {
+  .component {
+    max-width: 210px;
+    min-width: 210px;
+  }
+}
+
+@media (max-width: 1030px) {
   .news {
     padding: 20px;
 
@@ -86,6 +93,8 @@
     align-items: start;
     height: fit-content;
     max-width: 100vw;
+    order: 2;
+    position: relative;
   }
   .title {
     width: 100%;
