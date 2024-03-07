@@ -6,20 +6,16 @@ import Nav from '@/components/Nav/Nav';
 
 function Contacts() {
   return (
-    <>
-      <Nav />
-      <Layout>
-        <div className="contacts">
-          <span className="contacts__title">Отправьте нам сообщение</span>
-          <p className="contacts__text">
-            Если у вас есть какие-то вопросы или предложение по сотрудничеству -
-            напишите на почту &nbsp;
-            <a href="mailto:secular@butic64.ru">secular@butic64.ru</a>
-          </p>
-        </div>
-        <Footer />
-      </Layout>
-    </>
+    <Layout>
+      <div className="contacts">
+        <span className="contacts__title">Отправьте нам сообщение</span>
+        <p className="contacts__text">
+          Если у вас есть какие-то вопросы или предложение по сотрудничеству -
+          напишите на почту &nbsp;
+          <a href="mailto:secular@butic64.ru">secular@butic64.ru</a>
+        </p>
+      </div>
+    </Layout>
   );
 }
 

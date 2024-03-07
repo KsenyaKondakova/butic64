@@ -1,3 +1,5 @@
+import { Footer } from '../Footer/Footer';
+import Nav from '../Nav/Nav';
 import styles from './Layout.module.scss';
 
 type LayoutProps = {
@@ -5,9 +7,15 @@ type LayoutProps = {
 };
 function Layout({ children }: LayoutProps) {
   return (
-    <main className={styles.layout}>
-      <div className={styles.layout__children}>{children}</div>
-    </main>
+    <>
+      <Nav />
+      <main className={styles.layout}>
+        <div className={styles.layout__children}>
+          <div className={styles.main__page__container}>{children}</div>
+        </div>
+      </main>
+      <Footer />
+    </>
   );
 }
 
