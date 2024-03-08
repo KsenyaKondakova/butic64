@@ -25,17 +25,71 @@
 .nav {
   display: flex;
   width: 100%;
-  justify-content: space-around;
-  column-gap: 45px;
   font-size: 20px;
   a {
-    color: $full-white;
-    transition: color 0.1s ease-in-out;
-    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    color: #222;
   }
-  a:hover {
-    color: $hover-color;
-  }
+}
+.nav > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.topmenu {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  column-gap: 50px;
+  justify-content: center;
+}
+.topmenu > li {
+  display: inline-block;
+  position: relative;
+}
+.topmenu > li > span {
+  position: relative;
+  line-height: 1;
+  letter-spacing: 3px;
+  color: $full-white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.submenu {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 20px;
+  width: max-content;
+  padding: 10px 15px;
+  margin-top: 5px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  visibility: hidden;
+  opacity: 0;
+  transform: translate(-50%, 20px);
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  row-gap: 3px;
+}
+.topmenu > li:hover .submenu {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.submenu a {
+  font-size: 12px;
+  letter-spacing: 1px;
+  padding: 5px 10px;
+  transition: 0.2s linear;
+}
+.submenu a:hover {
+  background: #e8e8e8;
 }
 .header__container__mobile {
   position: fixed;
