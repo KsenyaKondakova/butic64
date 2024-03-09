@@ -1,4 +1,7 @@
+import { usePlaceFetch } from '@/hooks/useDataFetching';
+import { useLifeStyleCategories } from '@/hooks/useReduxSelectors';
 import axios from 'axios';
+import Image from 'next/image';
 import { NextRouter, useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,6 +24,8 @@ const ViewPlace = () => {
   const placeInfo = useSelector(
     (state: RootState) => state.lifeStyle.placeInfo,
   );
+  const lifeStyleCategories = useLifeStyleCategories();
+  console.log(lifeStyleCategories.find((item) => item.name === 'Психолог'));
   const id: string | string[] | undefined = router.query.id;
   useEffect(() => {
     if (!id) {
@@ -31,38 +36,54 @@ const ViewPlace = () => {
       console.log(response.data);
     });
   }, [id]);
+  usePlaceFetch();
   return (
-    <>
-      <Nav />
-      <Layout>
-        <div className={styles.container}>
-          <div className={styles.content}>
-            <h2 className={styles.content__title}>{placeInfo.title}</h2>
-            <p
-              className={styles.content__text}
-              dangerouslySetInnerHTML={{
-                __html: placeInfo.description
-                  .split('\n') // Разбиваем текст по символу новой строки
-                  .map((line) => `<span>${line}</span>`) // Оборачиваем каждую строку в тег <span>
-                  .join('<br>'), // Объединяем строки с использованием тега <br>
-              }}
-            />
-            <div className="gallery">
-              {placeInfo?.images && placeInfo.images.length !== 0 && (
-                <Slider images={placeInfo.images} sliderIndex={1} />
-              )}
+    <Layout>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          {lifeStyleCategories.find((item) => item.name === 'Психолог')?._id ===
+            placeInfo.category ||
+            (!placeInfo.logo?.length && (
+              <h2 className={styles.content__title}>{placeInfo.title}</h2>
+            ))}
+          {placeInfo.logo && placeInfo.logo[0] && (
+            <div className={styles.logo__container}>
+              <Image
+                src={placeInfo.logo[0]}
+                alt="Picture of the author"
+                sizes="500px"
+                fill
+                style={{
+                  objectFit: 'contain',
+                }}
+              />
             </div>
-            {placeInfo.news.length !== 0 && (
-              <NewsCard news={placeInfo.news} title="Новости" />
-            )}
-            {placeInfo.afisha?.length !== 0 && (
-              <AfishaCard afisha={placeInfo.afisha} title="Афиша" />
+          )}
+
+          <p
+            className={styles.content__text}
+            dangerouslySetInnerHTML={{
+              __html: placeInfo.description
+                .split('\n') // Разбиваем текст по символу новой строки
+                .map((line) => `<span>${line}</span>`) // Оборачиваем каждую строку в тег <span>
+                .join('<br>'), // Объединяем строки с использованием тега <br>
+            }}
+          />
+          <div className="gallery__place">
+            {placeInfo?.images && placeInfo.images.length !== 0 && (
+              <Slider images={placeInfo.images} sliderIndex={1} />
             )}
           </div>
+
+          {placeInfo.news.length !== 0 && (
+            <NewsCard news={placeInfo.news} title="Новости" />
+          )}
+          {placeInfo.afisha?.length !== 0 && (
+            <AfishaCard afisha={placeInfo.afisha} title="Афиша" />
+          )}
         </div>
-        <Footer />
-      </Layout>
-    </>
+      </div>
+    </Layout>
   );
 };
 
