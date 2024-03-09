@@ -31,8 +31,9 @@ function Nav() {
   return (
     <header className={styles.header}>
       <div className={styles.header__container}>
-        <Link href={'/'}>
+        <Link href={'/'} className={styles.title__link}>
           <h1 className={styles.header__title}>БУТИК64</h1>
+          <span className={styles.header__subtitle}>СВЕТСКИЙ ПОРТАЛ</span>
         </Link>
         <nav className={styles.nav}>
           <ul className={styles.topmenu}>
