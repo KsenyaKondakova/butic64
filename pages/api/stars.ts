@@ -11,8 +11,17 @@ export default async function apiHandler(
     await mongooseConnect();
 
     if (method === 'GET') {
-      const stars = await Star.find();
-      res.json(stars);
+      if (req.query?.id) {
+        const star = await Star.findOne({ _id: req.query.id });
+        if (star) {
+          res.json(star);
+        } else {
+          res.status(404).json({ error: 'Places not found' });
+        }
+      } else {
+        const stars = await Star.find();
+        res.json(stars);
+      }
     }
   } catch (error) {
     console.error('Server error:', error);
