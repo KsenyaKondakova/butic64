@@ -12,21 +12,30 @@ export default async function apiHandler(
     await mongooseConnect();
 
     if (method === 'GET') {
-      const category = await Category.find({ parent: null });
+      if (req.query?.id) {
+        const places = await Place.find({ category: req.query.id });
+        if (places.length > 0) {
+          res.json(places);
+        } else {
+          res.status(404).json({ error: 'Places not found' });
+        }
+      } else {
+        const category = await Category.find({ parent: null });
 
-      const lifystyleItem: any = category.filter(
-        (obj) => obj.name === 'BEAUTY',
-      );
-      const subCategories = await Category.find({
-        parent: lifystyleItem[0].id,
-      });
-      const categoryIds = subCategories
-        .map((subCat) => subCat._id)
-        .concat(lifystyleItem[0]._id);
-      const establishments = await Place.find({
-        category: { $in: categoryIds },
-      });
-      res.json({ establishments, subCategories });
+        const lifystyleItem: any = category.filter(
+          (obj) => obj.name === 'BEAUTY',
+        );
+        const subCategories = await Category.find({
+          parent: lifystyleItem[0].id,
+        });
+        const categoryIds = subCategories
+          .map((subCat) => subCat._id)
+          .concat(lifystyleItem[0]._id);
+        const establishments = await Place.find({
+          category: { $in: categoryIds },
+        });
+        res.json({ establishments, subCategories });
+      }
     }
   } catch (error) {
     console.error('Server error:', error);

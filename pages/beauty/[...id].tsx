@@ -1,9 +1,12 @@
 import {
   useAfishaFetch,
+  useLifeStyleFetch,
   useNewsFetch,
   usePlaceFetch,
 } from '@/hooks/useDataFetching';
 import {
+  useBeautyPlacesData,
+  useLifeStyleCategories,
   useMainAfisha,
   useMainNews,
   useMergeAfisha,
@@ -11,27 +14,30 @@ import {
   useModalAfisha,
   useModalNews,
   usePlacesAfisha,
-  usePlacesData,
   usePlacesNews,
 } from '@/hooks/useReduxSelectors';
 import { convertISOToCustomFormat } from '@/utils/date';
-import Link from 'next/link';
+import axios from 'axios';
+import { NextRouter, useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import Afisha from '@/components/Afisha/Afisha';
+import Cards from '@/components/Cards/Cards';
 import Layout from '@/components/Layout/Layout';
 import { Modal } from '@/components/Modal/Modal';
-import ModalSlider from '@/components/ModalSlider/ModalSlider';
 import News from '@/components/News/News';
-import Slider from '@/components/Slider/Slider';
 
 import { setMergeAfisha } from '@/redux/slices/afishaSlice';
+import { setBeautyPlaces } from '@/redux/slices/beautySlice';
 import { setMergeNews } from '@/redux/slices/newsSlice';
 
-export default function Home() {
+function Lifestyle() {
+  const router: NextRouter = useRouter();
+  const id: string | string[] | undefined = router.query.id;
   const dispatch = useDispatch();
-  const places = usePlacesData();
+  const places = useBeautyPlacesData();
+  const categories = useLifeStyleCategories();
   const placesNews = usePlacesNews();
   const placesAfisha = usePlacesAfisha();
   const mainNews = useMainNews();
@@ -41,12 +47,20 @@ export default function Home() {
   const modalNews = useModalNews();
   const modalAfisha = useModalAfisha();
   const [modalActive, setModalActive] = useState<boolean>(false);
-  const [modalWindow, setModalWindow] = useState<string>('');
-  const [modalImages, setModalImages] = useState<string[]>([]);
-  const [modalIndexImages, setModalIndexImages] = useState<number>(1);
+  const [modalNewsOrImage, setModalNewsOrImage] = useState<boolean>(false);
   usePlaceFetch();
   useNewsFetch();
   useAfishaFetch();
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    console.log(id);
+    const categoryId = Array.isArray(id) ? id[0] : id;
+    axios.get('/api/beauty?id=' + categoryId).then((response) => {
+      dispatch(setBeautyPlaces(response.data));
+    });
+  }, [id]);
 
   useEffect(() => {
     dispatch(setMergeNews({ placesNews, mainNews }));
@@ -56,53 +70,23 @@ export default function Home() {
     dispatch(setMergeAfisha({ placesAfisha, mainAfisha }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [placesAfisha, mainAfisha]);
-
   return (
     <Layout>
       <News
         news={mergeNews}
         title={'Новости города'}
         setModalActive={setModalActive}
-        setModalWindow={setModalWindow}
+        setModalNewsOrImage={setModalNewsOrImage}
       />
-      <div className="gallery">
-        {places.map((place, index) => {
-          if (place.images && place.images.length > 0) {
-            return (
-              <div key={place._id} className="gallery__container">
-                <Slider
-                  key={index}
-                  images={place.images}
-                  sliderIndex={index}
-                  setModalActive={setModalActive}
-                  setModalWindow={setModalWindow}
-                  setModalImages={setModalImages}
-                  setModalIndexImages={setModalIndexImages}
-                />
-                <div className="gallery__container__text">
-                  <Link href={`/place/${place._id}`}>{place.title}</Link>
-                  {place.dateImages !== 'NaN.NaN.NaN' ? (
-                    <span>{place.dateImages}</span>
-                  ) : (
-                    ''
-                  )}
-                </div>
-              </div>
-            );
-          } else {
-            return null;
-          }
-        })}
-      </div>
+      <Cards data={places} categories={categories} />
       <Afisha
         afisha={mergeAfisha}
         title={'Афиша города'}
         setModalActive={setModalActive}
-        setModalWindow={setModalWindow}
+        setModalNewsOrImage={setModalNewsOrImage}
       />
-
       <Modal modalActive={modalActive} setModalActive={setModalActive}>
-        {modalWindow === 'news' && (
+        {modalNewsOrImage ? (
           <>
             <span className="modal__newsName">{modalNews.newsName}</span>
             <p
@@ -110,7 +94,7 @@ export default function Home() {
               dangerouslySetInnerHTML={{
                 __html: modalNews.newsText
                   .split('\n')
-                  .map((line, index) => `<span key=${index}>${line}</span>`)
+                  .map((line) => `<span>${line}</span>`)
                   .join('<br>'),
               }}
             />
@@ -118,18 +102,13 @@ export default function Home() {
               {convertISOToCustomFormat(modalNews.date)}
             </span>
           </>
-        )}
-        {modalWindow === 'afisha' && (
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element
           <img className="modal__afisha" src={modalAfisha.image} alt="f" />
-        )}
-        {modalWindow === 'slider' && (
-          <ModalSlider
-            images={modalImages}
-            sliderIndex={11}
-            modalIndexImages={modalIndexImages}
-          />
         )}
       </Modal>
     </Layout>
   );
 }
+
+export default Lifestyle;

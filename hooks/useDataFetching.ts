@@ -121,3 +121,45 @@ export const useStarsFetch = () => {
       });
   }, [dispatch]);
 };
+export const useLyfeStyleCategoriesFetch = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    axios
+      .get('/api/categories?group=' + 'lifestyle_group')
+      .then((response) => {
+        dispatch(setLyfeStyleCategories(response.data));
+      })
+      .catch((error) => {
+        console.error('Error fetching places: ', error);
+      });
+  }, [dispatch]);
+};
+export const useFashionCategoriesFetch = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    axios
+      .get('/api/categories?group=' + 'fashion_group')
+      .then((response) => {
+        dispatch(setFashionCategories(response.data));
+      })
+      .catch((error) => {
+        console.error('Error fetching places: ', error);
+      });
+  }, [dispatch]);
+};
+export const useBeautyCategoriesFetch = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    axios
+      .get('/api/categories?group=' + 'beuty_group')
+      .then((response) => {
+        dispatch(setBeautyCategories(response.data));
+      })
+      .catch((error) => {
+        console.error('Error fetching places: ', error);
+      });
+  }, [dispatch]);
+};

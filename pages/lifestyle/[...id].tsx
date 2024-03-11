@@ -1,10 +1,12 @@
 import {
   useAfishaFetch,
+  useLifeStyleFetch,
   useNewsFetch,
   usePlaceFetch,
-  useStarsFetch,
 } from '@/hooks/useDataFetching';
 import {
+  useLifeStyleCategories,
+  useLifeStylePlacesData,
   useMainAfisha,
   useMainNews,
   useMergeAfisha,
@@ -13,29 +15,29 @@ import {
   useModalNews,
   usePlacesAfisha,
   usePlacesNews,
-  useStarsData,
-  useViewStarData,
 } from '@/hooks/useReduxSelectors';
 import { convertISOToCustomFormat } from '@/utils/date';
-import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { NextRouter, useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import Afisha from '@/components/Afisha/Afisha';
+import Cards from '@/components/Cards/Cards';
 import Layout from '@/components/Layout/Layout';
 import { Modal } from '@/components/Modal/Modal';
 import News from '@/components/News/News';
-import Slider from '@/components/Slider/Slider';
 
 import { setMergeAfisha } from '@/redux/slices/afishaSlice';
+import { setLyfeStylePlaces } from '@/redux/slices/lifeStyle';
 import { setMergeNews } from '@/redux/slices/newsSlice';
-import { setViewStar } from '@/redux/slices/starsSlice';
 
-import { StarList } from '@/types/placesType';
-
-const Stars = () => {
+function Lifestyle() {
+  const router: NextRouter = useRouter();
+  const id: string | string[] | undefined = router.query.id;
   const dispatch = useDispatch();
-  const stars = useStarsData();
+  const places = useLifeStylePlacesData();
+  const categories = useLifeStyleCategories();
   const placesNews = usePlacesNews();
   const placesAfisha = usePlacesAfisha();
   const mainNews = useMainNews();
@@ -44,18 +46,22 @@ const Stars = () => {
   const mergeAfisha = useMergeAfisha();
   const modalNews = useModalNews();
   const modalAfisha = useModalAfisha();
-  const viewStar = useViewStarData();
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [modalNewsOrImage, setModalNewsOrImage] = useState<boolean>(false);
-
   usePlaceFetch();
   useNewsFetch();
   useAfishaFetch();
-  useStarsFetch();
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    console.log(id);
+    const categoryId = Array.isArray(id) ? id[0] : id;
+    axios.get('/api/lifestyle?id=' + categoryId).then((response) => {
+      dispatch(setLyfeStylePlaces(response.data));
+    });
+  }, [id]);
 
-  const handleClickStar = (star: StarList) => {
-    dispatch(setViewStar(star));
-  };
   useEffect(() => {
     dispatch(setMergeNews({ placesNews, mainNews }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -64,11 +70,6 @@ const Stars = () => {
     dispatch(setMergeAfisha({ placesAfisha, mainAfisha }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [placesAfisha, mainAfisha]);
-  useEffect(() => {
-    const mainStar = stars.filter((obj) => obj.orderStar === '2');
-    dispatch(setViewStar(mainStar[0]));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stars]);
   return (
     <Layout>
       <News
@@ -77,76 +78,13 @@ const Stars = () => {
         setModalActive={setModalActive}
         setModalNewsOrImage={setModalNewsOrImage}
       />
-
-      <article className="stars">
-        {viewStar && (
-          <>
-            <h2 className="stars__title">
-              {viewStar.name}&nbsp;
-              {viewStar.secondName}
-            </h2>
-            <Slider
-              images={viewStar.images ? viewStar.images : []}
-              sliderIndex={1}
-            />
-            {viewStar.description && (
-              <p
-                className="stars__text"
-                dangerouslySetInnerHTML={{
-                  __html: viewStar.description
-                    .split('\n')
-                    .map((line) => `<span>${line}</span>`)
-                    .join('<br>'),
-                }}
-              />
-            )}
-            {viewStar.subdescription && (
-              <p
-                className="stars__text"
-                dangerouslySetInnerHTML={{
-                  __html: viewStar.subdescription
-                    .split('\n')
-                    .map((line) => `<span>${line}</span>`)
-                    .join('<br>'),
-                }}
-              />
-            )}
-            <div className="stars__list">
-              {stars.map((obj) => (
-                <div
-                  key={obj._id}
-                  className="stars__list__item"
-                  onClick={() => handleClickStar(obj)}
-                >
-                  <div className="stars__list__item__container">
-                    {obj.images && (
-                      <Image
-                        src={obj.images[0]}
-                        alt={obj.name}
-                        layout="fill"
-                        objectFit="cover"
-                        className="stars__list__item__img"
-                      />
-                    )}
-                  </div>
-
-                  <p className="stars__list__item__name">
-                    <span>{obj.name}</span>&nbsp; <span>{obj.secondName}</span>
-                  </p>
-                </div>
-              ))}
-            </div>
-          </>
-        )}
-      </article>
-
+      <Cards data={places} categories={categories} />
       <Afisha
         afisha={mergeAfisha}
         title={'Афиша города'}
         setModalActive={setModalActive}
         setModalNewsOrImage={setModalNewsOrImage}
       />
-
       <Modal modalActive={modalActive} setModalActive={setModalActive}>
         {modalNewsOrImage ? (
           <>
@@ -171,6 +109,6 @@ const Stars = () => {
       </Modal>
     </Layout>
   );
-};
+}
 
-export default Stars;
+export default Lifestyle;

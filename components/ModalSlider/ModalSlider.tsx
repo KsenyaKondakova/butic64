@@ -18,15 +18,15 @@ interface SliderProps {
   setModalActive?: React.Dispatch<React.SetStateAction<boolean>>;
   setModalWindow?: React.Dispatch<React.SetStateAction<string>>;
   setModalImages?: React.Dispatch<React.SetStateAction<string[]>>;
-  setModalIndexImages?: React.Dispatch<React.SetStateAction<number>>;
+  modalIndexImages?: number;
 }
-const Slider: React.FC<SliderProps> = ({
+const ModalSlider: React.FC<SliderProps> = ({
   images,
   sliderIndex,
   setModalActive,
   setModalWindow,
   setModalImages,
-  setModalIndexImages,
+  modalIndexImages,
 }) => {
   const handleClickSlider = (images: string[], index: number) => {
     if (setModalWindow) {
@@ -38,66 +38,21 @@ const Slider: React.FC<SliderProps> = ({
     if (setModalImages) {
       setModalImages(images);
     }
-    if (setModalIndexImages) {
-      setModalIndexImages(index);
-    }
   };
+  console.log(modalIndexImages);
   return (
     <div className={styles.container}>
       <Swiper
+        key={modalIndexImages}
         modules={[Navigation]}
         centerInsufficientSlides={true}
+        slidesPerView={1}
+        initialSlide={modalIndexImages}
         navigation={{
           nextEl: '.button-next',
           prevEl: '.button-prev',
         }}
-        className={'mySwiper ' + sliderIndex}
-        breakpoints={{
-          200: {
-            slidesPerView: 1,
-            spaceBetween: 2,
-          },
-          450: {
-            slidesPerView: 3,
-            spaceBetween: 2,
-          },
-          600: {
-            slidesPerView: 4,
-            spaceBetween: 2,
-          },
-          700: {
-            slidesPerView: 5,
-            spaceBetween: 2,
-          },
-          850: {
-            slidesPerView: 6,
-            spaceBetween: 2,
-          },
-          1030: {
-            slidesPerView: 4,
-            spaceBetween: 2,
-          },
-          1150: {
-            slidesPerView: 5,
-            spaceBetween: 2,
-          },
-          1250: {
-            slidesPerView: 6,
-            spaceBetween: 2,
-          },
-          1350: {
-            slidesPerView: 7,
-            spaceBetween: 2,
-          },
-          1450: {
-            slidesPerView: 8,
-            spaceBetween: 2,
-          },
-          1700: {
-            slidesPerView: 9,
-            spaceBetween: 2,
-          },
-        }}
+        className={'mySwiperModal ' + sliderIndex}
       >
         <button className={`button-prev ${styles.button}`}>
           <ChevronLeft />
@@ -118,4 +73,4 @@ const Slider: React.FC<SliderProps> = ({
   );
 };
 
-export default Slider;
+export default ModalSlider;
