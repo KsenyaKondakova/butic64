@@ -13,11 +13,11 @@ const Afisha: React.FC<AfishaProps> = ({
   afisha,
   title,
   setModalActive,
-  setModalNewsOrImage,
+  setModalWindow,
 }) => {
   const dispatch = useDispatch();
   const handleClickAfisha = (afisha: AfishaList) => {
-    setModalNewsOrImage(false);
+    setModalWindow('afisha');
     dispatch(setModalAfisha(afisha));
     setModalActive(true);
   };
