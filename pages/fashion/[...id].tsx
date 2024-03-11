@@ -5,6 +5,7 @@ import {
   usePlaceFetch,
 } from '@/hooks/useDataFetching';
 import {
+  useFashionPlacesData,
   useLifeStyleCategories,
   useLifeStylePlacesData,
   useMainAfisha,
@@ -37,7 +38,7 @@ function Lifestyle() {
   const router: NextRouter = useRouter();
   const id: string | string[] | undefined = router.query.id;
   const dispatch = useDispatch();
-  const places = useLifeStylePlacesData();
+  const places = useFashionPlacesData();
   const categories = useLifeStyleCategories();
   const placesNews = usePlacesNews();
   const placesAfisha = usePlacesAfisha();
