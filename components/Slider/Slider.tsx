@@ -15,8 +15,33 @@ import { A11y, Navigation, Pagination, Scrollbar } from 'swiper/modules';
 interface SliderProps {
   images: string[];
   sliderIndex: number;
+  setModalActive?: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalWindow?: React.Dispatch<React.SetStateAction<string>>;
+  setModalImages?: React.Dispatch<React.SetStateAction<string[]>>;
+  setModalIndexImages?: React.Dispatch<React.SetStateAction<number>>;
 }
-const Slider: React.FC<SliderProps> = ({ images, sliderIndex }) => {
+const Slider: React.FC<SliderProps> = ({
+  images,
+  sliderIndex,
+  setModalActive,
+  setModalWindow,
+  setModalImages,
+  setModalIndexImages,
+}) => {
+  const handleClickSlider = (images: string[], index: number) => {
+    if (setModalWindow) {
+      setModalWindow('slider');
+    }
+    if (setModalActive) {
+      setModalActive(true);
+    }
+    if (setModalImages) {
+      setModalImages(images);
+    }
+    if (setModalIndexImages) {
+      setModalIndexImages(index);
+    }
+  };
   return (
     <div className={styles.container}>
       <Swiper
@@ -78,7 +103,10 @@ const Slider: React.FC<SliderProps> = ({ images, sliderIndex }) => {
           <ChevronLeft />
         </button>
         {images.map((image, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide
+            key={index}
+            onClick={() => handleClickSlider(images, index)}
+          >
             <img src={image} alt="photo" />
           </SwiperSlide>
         ))}
