@@ -24,6 +24,7 @@ import Afisha from '@/components/Afisha/Afisha';
 import Cards from '@/components/Cards/Cards';
 import Layout from '@/components/Layout/Layout';
 import { Modal } from '@/components/Modal/Modal';
+import ModalSlider from '@/components/ModalSlider/ModalSlider';
 import News from '@/components/News/News';
 
 import { setMergeAfisha } from '@/redux/slices/afishaSlice';
@@ -42,7 +43,9 @@ function Lifestyle() {
   const modalNews = useModalNews();
   const modalAfisha = useModalAfisha();
   const [modalActive, setModalActive] = useState<boolean>(false);
-  const [modalNewsOrImage, setModalNewsOrImage] = useState<boolean>(false);
+  const [modalWindow, setModalWindow] = useState<string>('');
+  const [modalImages, setModalImages] = useState<string[]>([]);
+  const [modalIndexImages, setModalIndexImages] = useState<number>(1);
   usePlaceFetch();
   useNewsFetch();
   useAfishaFetch();
@@ -61,17 +64,17 @@ function Lifestyle() {
         news={mergeNews}
         title={'Новости города'}
         setModalActive={setModalActive}
-        setModalNewsOrImage={setModalNewsOrImage}
+        setModalWindow={setModalWindow}
       />
       <Cards data={places} categories={categories} />
       <Afisha
         afisha={mergeAfisha}
         title={'Афиша города'}
         setModalActive={setModalActive}
-        setModalNewsOrImage={setModalNewsOrImage}
+        setModalWindow={setModalWindow}
       />
       <Modal modalActive={modalActive} setModalActive={setModalActive}>
-        {modalNewsOrImage ? (
+        {modalWindow === 'news' && (
           <>
             <span className="modal__newsName">{modalNews.newsName}</span>
             <p
@@ -79,7 +82,7 @@ function Lifestyle() {
               dangerouslySetInnerHTML={{
                 __html: modalNews.newsText
                   .split('\n')
-                  .map((line) => `<span>${line}</span>`)
+                  .map((line, index) => `<span key=${index}>${line}</span>`)
                   .join('<br>'),
               }}
             />
@@ -87,9 +90,16 @@ function Lifestyle() {
               {convertISOToCustomFormat(modalNews.date)}
             </span>
           </>
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
+        )}
+        {modalWindow === 'afisha' && (
           <img className="modal__afisha" src={modalAfisha.image} alt="f" />
+        )}
+        {modalWindow === 'slider' && (
+          <ModalSlider
+            images={modalImages}
+            sliderIndex={11}
+            modalIndexImages={modalIndexImages}
+          />
         )}
       </Modal>
     </Layout>
