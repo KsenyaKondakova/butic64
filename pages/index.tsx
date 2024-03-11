@@ -22,6 +22,7 @@ import { useDispatch } from 'react-redux';
 import Afisha from '@/components/Afisha/Afisha';
 import Layout from '@/components/Layout/Layout';
 import { Modal } from '@/components/Modal/Modal';
+import ModalSlider from '@/components/ModalSlider/ModalSlider';
 import News from '@/components/News/News';
 import Slider from '@/components/Slider/Slider';
 
@@ -40,7 +41,9 @@ export default function Home() {
   const modalNews = useModalNews();
   const modalAfisha = useModalAfisha();
   const [modalActive, setModalActive] = useState<boolean>(false);
-  const [modalNewsOrImage, setModalNewsOrImage] = useState<boolean>(false);
+  const [modalWindow, setModalWindow] = useState<string>('');
+  const [modalImages, setModalImages] = useState<string[]>([]);
+  const [modalIndexImages, setModalIndexImages] = useState<number>(1);
   usePlaceFetch();
   useNewsFetch();
   useAfishaFetch();
@@ -60,14 +63,22 @@ export default function Home() {
         news={mergeNews}
         title={'Новости города'}
         setModalActive={setModalActive}
-        setModalNewsOrImage={setModalNewsOrImage}
+        setModalWindow={setModalWindow}
       />
       <div className="gallery">
         {places.map((place, index) => {
           if (place.images && place.images.length > 0) {
             return (
               <div key={place._id} className="gallery__container">
-                <Slider key={index} images={place.images} sliderIndex={index} />
+                <Slider
+                  key={index}
+                  images={place.images}
+                  sliderIndex={index}
+                  setModalActive={setModalActive}
+                  setModalWindow={setModalWindow}
+                  setModalImages={setModalImages}
+                  setModalIndexImages={setModalIndexImages}
+                />
                 <div className="gallery__container__text">
                   <Link href={`/place/${place._id}`}>{place.title}</Link>
                   {place.dateImages !== 'NaN.NaN.NaN' ? (
@@ -87,11 +98,11 @@ export default function Home() {
         afisha={mergeAfisha}
         title={'Афиша города'}
         setModalActive={setModalActive}
-        setModalNewsOrImage={setModalNewsOrImage}
+        setModalWindow={setModalWindow}
       />
 
       <Modal modalActive={modalActive} setModalActive={setModalActive}>
-        {modalNewsOrImage ? (
+        {modalWindow === 'news' && (
           <>
             <span className="modal__newsName">{modalNews.newsName}</span>
             <p
@@ -99,7 +110,7 @@ export default function Home() {
               dangerouslySetInnerHTML={{
                 __html: modalNews.newsText
                   .split('\n')
-                  .map((line) => `<span>${line}</span>`)
+                  .map((line, index) => `<span key=${index}>${line}</span>`)
                   .join('<br>'),
               }}
             />
@@ -107,9 +118,16 @@ export default function Home() {
               {convertISOToCustomFormat(modalNews.date)}
             </span>
           </>
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
+        )}
+        {modalWindow === 'afisha' && (
           <img className="modal__afisha" src={modalAfisha.image} alt="f" />
+        )}
+        {modalWindow === 'slider' && (
+          <ModalSlider
+            images={modalImages}
+            sliderIndex={11}
+            modalIndexImages={modalIndexImages}
+          />
         )}
       </Modal>
     </Layout>
