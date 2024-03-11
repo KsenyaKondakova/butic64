@@ -41,11 +41,11 @@ const ViewPlace = () => {
     <Layout>
       <div className={styles.container}>
         <div className={styles.content}>
-          {lifeStyleCategories.find((item) => item.name === 'Психолог')?._id ===
-            placeInfo.category ||
-            (!placeInfo.logo?.length && (
-              <h2 className={styles.content__title}>{placeInfo.title}</h2>
-            ))}
+          {(lifeStyleCategories.find((item) => item.name === 'Психолог')
+            ?._id === placeInfo.category ||
+            !placeInfo.logo?.length) && (
+            <h2 className={styles.content__title}>{placeInfo.title}</h2>
+          )}
           {placeInfo.logo && placeInfo.logo[0] && (
             <div className={styles.logo__container}>
               <Image
