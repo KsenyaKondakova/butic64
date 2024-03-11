@@ -27,6 +27,7 @@ import { useDispatch } from 'react-redux';
 import Afisha from '@/components/Afisha/Afisha';
 import Layout from '@/components/Layout/Layout';
 import { Modal } from '@/components/Modal/Modal';
+import ModalSlider from '@/components/ModalSlider/ModalSlider';
 import News from '@/components/News/News';
 import Slider from '@/components/Slider/Slider';
 
@@ -51,7 +52,9 @@ const Stars = () => {
   const modalAfisha = useModalAfisha();
   const viewStar = useViewStarData();
   const [modalActive, setModalActive] = useState<boolean>(false);
-  const [modalNewsOrImage, setModalNewsOrImage] = useState<boolean>(false);
+  const [modalWindow, setModalWindow] = useState<string>('');
+  const [modalImages, setModalImages] = useState<string[]>([]);
+  const [modalIndexImages, setModalIndexImages] = useState<number>(1);
 
   usePlaceFetch();
   useNewsFetch();
@@ -84,7 +87,7 @@ const Stars = () => {
         news={mergeNews}
         title={'Новости города'}
         setModalActive={setModalActive}
-        setModalNewsOrImage={setModalNewsOrImage}
+        setModalWindow={setModalWindow}
       />
 
       <article className="stars">
@@ -173,11 +176,11 @@ const Stars = () => {
         afisha={mergeAfisha}
         title={'Афиша города'}
         setModalActive={setModalActive}
-        setModalNewsOrImage={setModalNewsOrImage}
+        setModalWindow={setModalWindow}
       />
 
       <Modal modalActive={modalActive} setModalActive={setModalActive}>
-        {modalNewsOrImage ? (
+        {modalWindow === 'news' && (
           <>
             <span className="modal__newsName">{modalNews.newsName}</span>
             <p
@@ -185,7 +188,7 @@ const Stars = () => {
               dangerouslySetInnerHTML={{
                 __html: modalNews.newsText
                   .split('\n')
-                  .map((line) => `<span>${line}</span>`)
+                  .map((line, index) => `<span key=${index}>${line}</span>`)
                   .join('<br>'),
               }}
             />
@@ -193,9 +196,16 @@ const Stars = () => {
               {convertISOToCustomFormat(modalNews.date)}
             </span>
           </>
-        ) : (
-          // eslint-disable-next-line @next/next/no-img-element
+        )}
+        {modalWindow === 'afisha' && (
           <img className="modal__afisha" src={modalAfisha.image} alt="f" />
+        )}
+        {modalWindow === 'slider' && (
+          <ModalSlider
+            images={modalImages}
+            sliderIndex={11}
+            modalIndexImages={modalIndexImages}
+          />
         )}
       </Modal>
     </Layout>
