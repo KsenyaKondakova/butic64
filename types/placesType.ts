@@ -84,7 +84,7 @@ export interface AfishaProps {
   afisha: AfishaList[];
   title: string;
   setModalActive: React.Dispatch<React.SetStateAction<boolean>>;
-  setModalNewsOrImage: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalWindow: React.Dispatch<React.SetStateAction<string>>;
 }
 export interface AfishaCardProps {
   afisha: string[] | undefined;
@@ -94,7 +94,7 @@ export interface NewsProps {
   news: NewsList[];
   title: string;
   setModalActive: React.Dispatch<React.SetStateAction<boolean>>;
-  setModalNewsOrImage: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalWindow: React.Dispatch<React.SetStateAction<string>>;
 }
 export interface NewsCardProps {
   news: NewsList[];
@@ -130,4 +130,11 @@ export interface IAfishaState {
   afisha: AfishaList[];
   mergeAfisha: AfishaList[];
   modalAfisha: AfishaList;
+}
+
+export interface IContactForm {
+  userName: string;
+  userPhone: string;
+  userMessage: string;
+  userEmail: string;
 }

@@ -6,9 +6,10 @@ body {
 .gallery {
   display: flex;
   flex-direction: column;
-  row-gap: 50px;
-  width: 100%;
+  row-gap: 30px;
+
   max-width: 1180px;
+  width: calc(100% - 700px);
   margin: 0 auto;
   padding-bottom: 20px;
   &__container {
@@ -32,38 +33,64 @@ body {
     }
   }
 }
-.main__page__container {
-  display: grid;
-  padding-top: 40px;
-  column-gap: 30px;
-  grid-template-columns: 300px auto 300px;
-  grid-template-areas: 'news cards afisha';
+.gallery__place {
   width: 100%;
 }
-.main__page__container__index {
-  display: grid;
-  padding-top: 40px;
-  column-gap: 30px;
-  grid-template-columns: 300px 1180px 300px;
-  grid-template-areas: 'news cards afisha';
+.mySwiperModal {
   width: 100%;
-
-  justify-content: center;
-}
-.grid__cards {
-  grid-area: cards;
-}
-.grid__afisha {
-  grid-area: afisha;
-}
-.grid__news {
-  grid-area: news;
-}
-
-.mySwiper {
-  height: 350px;
+  height: 100%;
   padding: 20px 0;
   position: relative;
+  .swiper-wrapper {
+    width: 100%;
+  }
+  .swiper-slide {
+    width: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .swiper-slide img {
+    height: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+  .button-prev,
+  .button-next {
+    background-color: transparent;
+    border: none;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+  .button-prev {
+    left: -15px;
+  }
+
+  .button-next {
+    right: -15px;
+  }
+  .swiper-pagination {
+    transform: translateY(15px);
+  }
+}
+.mySwiper {
+  width: 100%;
+  height: 100%;
+  padding: 20px 0;
+  position: relative;
+  .swiper-wrapper {
+    width: 100%;
+  }
   .swiper-slide {
     width: 320px;
     display: flex;
@@ -77,29 +104,29 @@ body {
     height: 100%;
 
     object-fit: cover;
-    display: block; /* убеждаемся, что изображение не имеет отступы сверху и снизу */
+    display: block;
     margin: 0 auto;
   }
   .button-prev,
   .button-next {
     background-color: transparent;
     border: none;
-    width: 50px; /* Задайте желаемую ширину кнопок */
-    height: 50px; /* Задайте желаемую высоту кнопок */
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    top: 50%; /* Позиционирование по вертикали в центре */
+    top: 50%;
     transform: translateY(-50%);
     z-index: 10;
   }
   .button-prev {
-    left: -15px; /* Позиционирование слева */
+    left: -15px;
   }
 
   .button-next {
-    right: -15px; /* Позиционирование справа */
+    right: -15px;
   }
   .swiper-pagination {
     transform: translateY(15px);
@@ -115,13 +142,16 @@ body {
   margin: 0 auto;
   grid-area: cards;
   padding-bottom: 20px;
+  &__text__container {
+    display: flex;
+  }
   &__title {
     font-size: 30px;
     text-align: center;
   }
   &__text {
     font-size: 16px;
-    background-color: $light-grey;
+
     padding: 20px;
     border-radius: 10px;
     & span {
@@ -141,14 +171,17 @@ body {
       align-items: center;
       row-gap: 10px;
       cursor: pointer;
+      &__div {
+        cursor: default;
+      }
       &__container {
         width: 100%;
         height: 300px;
         position: relative;
       }
       &__img {
-        width: 100%;
-        height: auto;
+        width: auto;
+        height: 100%;
         object-fit: contain;
       }
       &__name {
@@ -165,9 +198,13 @@ body {
   flex-direction: column;
   width: 100%;
   margin: 0 auto;
-  align-items: center;
-  row-gap: 10px;
+  row-gap: 20px;
   padding-top: 50px;
+  align-items: center;
+  p {
+    width: 100%;
+    text-align: center;
+  }
   &__title {
     font-weight: bold;
   }
@@ -199,114 +236,42 @@ body {
   height: 100%;
   object-fit: contain;
 }
-@media (max-width: 1850px) {
-  .main__page__container__index {
-    grid-template-columns: 300px 1150px 300px;
-  }
-}
-@media (max-width: 1810px) {
-  .main__page__container__index {
-    grid-template-columns: 300px 1100px 300px;
-  }
-}
-@media (max-width: 1770px) {
-  .main__page__container__index {
-    grid-template-columns: 300px 1050px 300px;
-  }
-}
-@media (max-width: 1730px) {
-  .main__page__container__index {
-    grid-template-columns: 300px 1000px 300px;
-  }
-}
-@media (max-width: 1690px) {
-  .main__page__container__index {
-    grid-template-columns: 300px 950px 300px;
-  }
-}
-@media (max-width: 1650px) {
-  .main__page__container__index {
-    grid-template-columns: 300px 900px 300px;
-  }
-}
-@media (max-width: 1610px) {
-  .main__page__container__index {
-    grid-template-columns: 300px 850px 300px;
-  }
-}
-@media (max-width: 1570px) {
-  .main__page__container__index {
-    grid-template-columns: 300px 800px 300px;
-  }
-}
-@media (max-width: 1530px) {
-  .main__page__container__index {
-    grid-template-columns: 300px 750px 300px;
-  }
-}
-@media (max-width: 1450px) {
-  .main__page__container__index {
-    grid-template-columns: 300px 700px 300px;
-  }
-}
-@media (max-width: 1400px) {
-  .main__page__container__index {
-    grid-template-columns: 300px 650px 300px;
-  }
-}
-@media (max-width: 1350px) {
-  .main__page__container__index {
-    padding: 20px;
-    padding-left: 0;
-    padding-right: 0;
-    overflow: hidden;
-    display: grid;
-    column-gap: 30px;
-    min-height: 100vh;
-    grid-template-columns: auto;
-    grid-template-rows: auto auto auto;
-    grid-template-areas:
-      'afisha'
-      'news'
-      'cards';
-    justify-content: center;
-    row-gap: 10px;
-  }
-}
-@media (max-width: 1350px) {
-  .main__page__container__index {
-    grid-template-columns: 100%;
-  }
-}
-@media (max-width: 940px) {
+// @media (min-width: 1920px) {
+//   .mySwiperModal {
+//     height: 900px;
+//   }
+// }
+
+@media (max-width: 1600px) {
   .gallery {
-    width: 90%;
+    width: calc(100% - 520px);
+  }
+  .mySwiperModal {
+    height: 100%;
   }
 }
-@media (max-width: 1350px) {
-  .main__page__container {
-    padding: 20px;
-    padding-left: 0;
-    padding-right: 0;
-    overflow: hidden;
-    display: grid;
-    column-gap: 30px;
-    min-height: 100vh;
-    grid-template-columns: auto;
-    grid-template-rows: auto auto auto;
-    grid-template-areas:
-      'afisha'
-      'news'
-      'cards';
-    justify-content: center;
+@media (max-width: 1030px) {
+  .gallery {
+    order: 3;
+    width: 100%;
+  }
+  .stars {
+    order: 3;
+    width: 100%;
   }
 }
 @media (max-width: 420px) {
   .mySwiper {
     height: 200px;
+    .swiper-slide img {
+      height: 100% !important;
+    }
   }
-  .swiper-slide img {
-    height: 100% !important;
+  .mySwiperModal {
+    .swiper-slide img {
+      width: 100% !important;
+      height: auto;
+    }
   }
 }
 @media (max-width: 480px) {
@@ -339,5 +304,8 @@ body {
     &__text {
       width: 300px;
     }
+  }
+  .stars__text__container {
+    flex-direction: column;
   }
 }

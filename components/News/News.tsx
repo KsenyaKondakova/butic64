@@ -16,7 +16,7 @@ const News: React.FC<NewsProps> = ({
   news,
   title,
   setModalActive,
-  setModalNewsOrImage,
+  setModalWindow,
 }) => {
   const dispatch = useDispatch();
   const loading = useSelector((state: RootState) => state.placeSlice.isLoading);
@@ -29,7 +29,7 @@ const News: React.FC<NewsProps> = ({
   }, [news]);
 
   const handleClickNews = (news: NewsList) => {
-    setModalNewsOrImage(true);
+    setModalWindow('news');
     dispatch(setModalNews(news));
     setModalActive(true);
   };

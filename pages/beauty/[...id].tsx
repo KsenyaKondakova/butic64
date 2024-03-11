@@ -5,8 +5,8 @@ import {
   usePlaceFetch,
 } from '@/hooks/useDataFetching';
 import {
+  useBeautyPlacesData,
   useLifeStyleCategories,
-  useLifeStylePlacesData,
   useMainAfisha,
   useMainNews,
   useMergeAfisha,
@@ -17,6 +17,8 @@ import {
   usePlacesNews,
 } from '@/hooks/useReduxSelectors';
 import { convertISOToCustomFormat } from '@/utils/date';
+import axios from 'axios';
+import { NextRouter, useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -27,11 +29,14 @@ import { Modal } from '@/components/Modal/Modal';
 import News from '@/components/News/News';
 
 import { setMergeAfisha } from '@/redux/slices/afishaSlice';
+import { setBeautyPlaces } from '@/redux/slices/beautySlice';
 import { setMergeNews } from '@/redux/slices/newsSlice';
 
 function Lifestyle() {
+  const router: NextRouter = useRouter();
+  const id: string | string[] | undefined = router.query.id;
   const dispatch = useDispatch();
-  const places = useLifeStylePlacesData();
+  const places = useBeautyPlacesData();
   const categories = useLifeStyleCategories();
   const placesNews = usePlacesNews();
   const placesAfisha = usePlacesAfisha();
@@ -46,7 +51,16 @@ function Lifestyle() {
   usePlaceFetch();
   useNewsFetch();
   useAfishaFetch();
-  useLifeStyleFetch();
+  useEffect(() => {
+    if (!id) {
+      return;
+    }
+    console.log(id);
+    const categoryId = Array.isArray(id) ? id[0] : id;
+    axios.get('/api/beauty?id=' + categoryId).then((response) => {
+      dispatch(setBeautyPlaces(response.data));
+    });
+  }, [id]);
 
   useEffect(() => {
     dispatch(setMergeNews({ placesNews, mainNews }));
@@ -56,7 +70,6 @@ function Lifestyle() {
     dispatch(setMergeAfisha({ placesAfisha, mainAfisha }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [placesAfisha, mainAfisha]);
-
   return (
     <Layout>
       <News
