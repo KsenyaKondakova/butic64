@@ -21,6 +21,7 @@
     width: 50vw;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     row-gap: 10px;
     overflow-y: scroll;
   }
@@ -40,6 +41,13 @@
   .modal {
     &__content {
       height: 70vh;
+    }
+  }
+}
+@media (max-width: 420px) {
+  .modal {
+    &__content {
+      width: 100%;
     }
   }
 }
