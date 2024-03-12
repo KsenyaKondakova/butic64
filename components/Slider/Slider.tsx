@@ -10,6 +10,7 @@ import 'swiper/css/pagination';
 
 import ChevronLeft from '@/public/assets/icons/ChevronLeft';
 import ChevronRight from '@/public/assets/icons/ChevronRight';
+import Image from 'next/image';
 import { A11y, Navigation, Pagination, Scrollbar } from 'swiper/modules';
 
 interface SliderProps {
@@ -107,7 +108,13 @@ const Slider: React.FC<SliderProps> = ({
             key={index}
             onClick={() => handleClickSlider(images, index)}
           >
-            <img src={image} alt="photo" />
+            <Image
+              src={image}
+              alt="photo"
+              width={320}
+              height={200}
+              objectFit="cover"
+            />
           </SwiperSlide>
         ))}
         <button className={`button-next ${styles.button}`}>
