@@ -80,7 +80,11 @@ export default function Home() {
                   setModalIndexImages={setModalIndexImages}
                 />
                 <div className="gallery__container__text">
-                  <Link href={`/place/${place._id}`}>{place.title}</Link>
+                  {place.description === 'Фото' ? (
+                    <span>{place.title}</span>
+                  ) : (
+                    <Link href={`/place/${place._id}`}>{place.title}</Link>
+                  )}
                   {place.dateImages !== 'NaN.NaN.NaN' ? (
                     <span>{place.dateImages}</span>
                   ) : (
