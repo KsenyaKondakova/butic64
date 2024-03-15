@@ -211,9 +211,16 @@ body {
   row-gap: 20px;
   padding-top: 50px;
   align-items: center;
+  justify-content: space-between;
   p {
     width: 100%;
     text-align: center;
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    align-items: center;
   }
   &__title {
     font-weight: bold;
@@ -224,6 +231,11 @@ body {
     a {
       text-decoration: underline;
     }
+  }
+  &__counter {
+    width: 88px;
+    height: 31px;
+    border: 0;
   }
 }
 .modal__newsName {
