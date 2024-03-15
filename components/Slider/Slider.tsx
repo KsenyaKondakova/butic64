@@ -107,6 +107,7 @@ const Slider: React.FC<SliderProps> = ({
           <SwiperSlide
             key={index}
             onClick={() => handleClickSlider(images, index)}
+            className="skeleton"
           >
             <Image
               src={image}

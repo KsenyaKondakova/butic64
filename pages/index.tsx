@@ -79,6 +79,7 @@ export default function Home() {
                   setModalImages={setModalImages}
                   setModalIndexImages={setModalIndexImages}
                 />
+
                 <div className="gallery__container__text">
                   {place.description === 'Фото' ? (
                     <span>{place.title}</span>
