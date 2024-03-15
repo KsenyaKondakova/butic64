@@ -94,8 +94,9 @@ body {
   .swiper-slide {
     text-align: center;
     font-size: 18px;
-    background: #fff;
-    /* Center slide text vertically */
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 400% 100%;
+    animation: skeleton-animation 1.5s infinite linear;
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -238,18 +239,22 @@ body {
 .modal__newsText {
   span {
     display: block;
-    text-indent: 20px; // Отступ красной строки
+    text-indent: 20px;
   }
 }
 .modal__afisha {
   height: 100%;
   object-fit: contain;
 }
-// @media (min-width: 1920px) {
-//   .mySwiperModal {
-//     height: 900px;
-//   }
-// }
+
+@keyframes skeleton-animation {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
 
 @media (max-width: 1600px) {
   .gallery {
@@ -269,20 +274,7 @@ body {
     width: 100%;
   }
 }
-@media (max-width: 420px) {
-  .mySwiper {
-    height: 200px;
-    .swiper-slide img {
-      height: 100% !important;
-    }
-  }
-  .mySwiperModal {
-    .swiper-slide img {
-      width: 100% !important;
-      height: auto;
-    }
-  }
-}
+
 @media (max-width: 480px) {
   .stars {
     &__title {
@@ -316,5 +308,18 @@ body {
   }
   .stars__text__container {
     flex-direction: column;
+  }
+}
+@media (max-width: 449px) {
+  .mySwiper {
+    .swiper-slide {
+      background: none;
+    }
+    .swiper-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
   }
 }
