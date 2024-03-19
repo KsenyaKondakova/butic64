@@ -127,7 +127,7 @@ const Stars = () => {
             </div>
             <div className="stars__list">
               {stars.map((obj, index) => {
-                return index === 2 ? (
+                return obj.orderStar === '3' ? (
                   <div key={obj._id} className="stars__list__item__div">
                     <div className="stars__list__item__container">
                       {obj.images && (
