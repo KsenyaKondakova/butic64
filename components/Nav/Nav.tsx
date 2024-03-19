@@ -11,6 +11,7 @@ import {
   usePlacesData,
   useStarsData,
 } from '@/hooks/useReduxSelectors';
+import { convertMonthToString } from '@/utils/date';
 import axios from 'axios';
 import Link from 'next/link';
 import { NextRouter, useRouter } from 'next/router';
@@ -34,6 +35,7 @@ function Nav() {
   const [beautyActive, setBeautyActive] = useState<boolean>(false);
   const [fashionActive, setFashionActive] = useState<boolean>(false);
   const [lifeStyleActive, setLifeStyleActive] = useState<boolean>(false);
+  const currentMonth = new Date().getMonth() + 1;
   console.log(stars);
   useStarsFetch();
   return (
@@ -49,17 +51,49 @@ function Nav() {
               <span>Звезды</span>
               <ul className={styles.submenu}>
                 {stars.map((obj, index) => {
-                  return obj.orderStar === '3' ? (
-                    <li key={obj._id}>
-                      <span>{obj.name + ' ' + obj.secondName}</span>
-                    </li>
-                  ) : (
-                    <li key={obj._id}>
-                      <Link href={'/stars/' + obj._id}>
-                        {obj.name + ' ' + obj.secondName}
-                      </Link>
-                    </li>
-                  );
+                  if (obj.orderStar === '1') {
+                    return (
+                      <li key={obj._id}>
+                        <Link href={'/stars/' + obj._id}>
+                          {'Звезда' +
+                            ' ' +
+                            convertMonthToString(String(currentMonth - 1)) +
+                            ' ' +
+                            obj.name +
+                            ' ' +
+                            obj.secondName}
+                        </Link>
+                      </li>
+                    );
+                  } else if (obj.orderStar === '2') {
+                    return (
+                      <li key={obj._id}>
+                        <Link href={'/stars/' + obj._id}>
+                          {'Звезда' +
+                            ' ' +
+                            convertMonthToString(String(currentMonth)) +
+                            ' ' +
+                            obj.name +
+                            ' ' +
+                            obj.secondName}
+                        </Link>
+                      </li>
+                    );
+                  } else if (obj.orderStar === '3') {
+                    return (
+                      <li key={obj._id}>
+                        <span>
+                          {'Звезда' +
+                            ' ' +
+                            convertMonthToString(String(currentMonth + 1)) +
+                            ' ' +
+                            obj.name +
+                            ' ' +
+                            obj.secondName}
+                        </span>
+                      </li>
+                    );
+                  }
                 })}
               </ul>
             </li>
@@ -148,17 +182,49 @@ function Nav() {
                   className={`${styles.submenu__mobile} ${starsActive ? styles.active : ''}`}
                 >
                   {stars.map((obj, index) => {
-                    return obj.orderStar === '3' ? (
-                      <li key={obj._id}>
-                        <span>{obj.name + ' ' + obj.secondName}</span>
-                      </li>
-                    ) : (
-                      <li key={obj._id}>
-                        <Link href={'/stars/' + obj._id}>
-                          {obj.name + ' ' + obj.secondName}
-                        </Link>
-                      </li>
-                    );
+                    if (obj.orderStar === '1') {
+                      return (
+                        <li key={obj._id}>
+                          <Link href={'/stars/' + obj._id}>
+                            {'Звезда' +
+                              ' ' +
+                              convertMonthToString(String(currentMonth - 1)) +
+                              ' ' +
+                              obj.name +
+                              ' ' +
+                              obj.secondName}
+                          </Link>
+                        </li>
+                      );
+                    } else if (obj.orderStar === '2') {
+                      return (
+                        <li key={obj._id}>
+                          <Link href={'/stars/' + obj._id}>
+                            {'Звезда' +
+                              ' ' +
+                              convertMonthToString(String(currentMonth)) +
+                              ' ' +
+                              obj.name +
+                              ' ' +
+                              obj.secondName}
+                          </Link>
+                        </li>
+                      );
+                    } else if (obj.orderStar === '3') {
+                      return (
+                        <li key={obj._id}>
+                          <span>
+                            {'Звезда' +
+                              ' ' +
+                              convertMonthToString(String(currentMonth + 1)) +
+                              ' ' +
+                              obj.name +
+                              ' ' +
+                              obj.secondName}
+                          </span>
+                        </li>
+                      );
+                    }
                   })}
                 </ul>
               </li>
