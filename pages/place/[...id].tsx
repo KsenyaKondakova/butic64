@@ -7,9 +7,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AfishaCard } from '@/components/AfishaCard/AfishaCard';
-import { Footer } from '@/components/Footer/Footer';
 import Layout from '@/components/Layout/Layout';
-import Nav from '@/components/Nav/Nav';
 import { NewsCard } from '@/components/NewsCard/NewsCard';
 import Slider from '@/components/Slider/Slider';
 
@@ -61,9 +59,9 @@ const ViewPlace = () => {
             className={styles.content__text}
             dangerouslySetInnerHTML={{
               __html: placeInfo.description
-                .split('\n') // Разбиваем текст по символу новой строки
-                .map((line) => `<span>${line}</span>`) // Оборачиваем каждую строку в тег <span>
-                .join('<br>'), // Объединяем строки с использованием тега <br>
+                .split('\n')
+                .map((line) => `<span>${line}</span>`)
+                .join('<br>'),
             }}
           />
           <div className="gallery__place">
