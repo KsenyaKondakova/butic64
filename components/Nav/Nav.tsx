@@ -34,6 +34,7 @@ function Nav() {
   const [beautyActive, setBeautyActive] = useState<boolean>(false);
   const [fashionActive, setFashionActive] = useState<boolean>(false);
   const [lifeStyleActive, setLifeStyleActive] = useState<boolean>(false);
+  console.log(stars);
   useStarsFetch();
   return (
     <header className={styles.header}>
@@ -48,7 +49,7 @@ function Nav() {
               <span>Звезды</span>
               <ul className={styles.submenu}>
                 {stars.map((obj, index) => {
-                  return index === 2 ? (
+                  return obj.orderStar === '3' ? (
                     <li key={obj._id}>
                       <span>{obj.name + ' ' + obj.secondName}</span>
                     </li>
@@ -147,7 +148,7 @@ function Nav() {
                   className={`${styles.submenu__mobile} ${starsActive ? styles.active : ''}`}
                 >
                   {stars.map((obj, index) => {
-                    return index === 2 ? (
+                    return obj.orderStar === '3' ? (
                       <li key={obj._id}>
                         <span>{obj.name + ' ' + obj.secondName}</span>
                       </li>
