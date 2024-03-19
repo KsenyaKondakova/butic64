@@ -14,3 +14,22 @@ export function convertDatesToISO(date: any) {
     console.error('Некорректный формат даты:', date);
   }
 }
+export function convertMonthToString(month: string): string {
+  const months: string[] = [
+    'января',
+    'февраля',
+    'марта',
+    'апреля',
+    'мая',
+    'июня',
+    'июля',
+    'августа',
+    'сентября',
+    'октября',
+    'ноября',
+    'декабря',
+  ];
+
+  const index = parseInt(month, 10) - 1;
+  return months[index];
+}
