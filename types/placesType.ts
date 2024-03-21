@@ -55,6 +55,7 @@ export interface AfishaList {
   _id?: number | string | null;
   image: string;
   parent?: number | string | null;
+  dateImages?: string;
 }
 
 export interface NewAfishaForm {

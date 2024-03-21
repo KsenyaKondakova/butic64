@@ -9,7 +9,7 @@ import {
 const initialState: IAfishaState = {
   afisha: [],
   mergeAfisha: [],
-  modalAfisha: { _id: '', image: '' },
+  modalAfisha: { _id: '', image: '', dateImages: '' },
 };
 
 export const afishaSlice = createSlice({
@@ -27,7 +27,23 @@ export const afishaSlice = createSlice({
       }>,
     ) => {
       const { placesAfisha, mainAfisha } = action.payload;
-      state.mergeAfisha = [...placesAfisha, ...mainAfisha];
+      const sortAfisha = [...placesAfisha, ...mainAfisha].sort(
+        (a: AfishaList, b: AfishaList) => {
+          const dateA = a.dateImages ? new Date(a.dateImages) : null;
+          const dateB = b.dateImages ? new Date(b.dateImages) : null;
+
+          if (dateA && dateB) {
+            return dateB.getTime() - dateA.getTime();
+          } else if (dateA && !dateB) {
+            return -1;
+          } else if (!dateA && dateB) {
+            return 1;
+          } else {
+            return 0;
+          }
+        },
+      );
+      state.mergeAfisha = sortAfisha;
     },
     setModalAfisha: (state, action: PayloadAction<AfishaList>) => {
       state.modalAfisha = action.payload;
