@@ -3,11 +3,13 @@ import { useLifeStyleCategories } from '@/hooks/useReduxSelectors';
 import axios from 'axios';
 import Image from 'next/image';
 import { NextRouter, useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { AfishaCard } from '@/components/AfishaCard/AfishaCard';
 import Layout from '@/components/Layout/Layout';
+import { Modal } from '@/components/Modal/Modal';
+import ModalSlider from '@/components/ModalSlider/ModalSlider';
 import { NewsCard } from '@/components/NewsCard/NewsCard';
 import Slider from '@/components/Slider/Slider';
 
@@ -25,6 +27,10 @@ const ViewPlace = () => {
   const lifeStyleCategories = useLifeStyleCategories();
   console.log(lifeStyleCategories.find((item) => item.name === 'Психолог'));
   const id: string | string[] | undefined = router.query.id;
+  const [modalActive, setModalActive] = useState<boolean>(false);
+  const [modalWindow, setModalWindow] = useState<string>('');
+  const [modalImages, setModalImages] = useState<string[]>([]);
+  const [modalIndexImages, setModalIndexImages] = useState<number>(1);
   useEffect(() => {
     if (!id) {
       return;
@@ -66,7 +72,14 @@ const ViewPlace = () => {
           />
           <div className="gallery__place">
             {placeInfo?.images && placeInfo.images.length !== 0 && (
-              <Slider images={placeInfo.images} sliderIndex={1} />
+              <Slider
+                images={placeInfo.images}
+                sliderIndex={1}
+                setModalActive={setModalActive}
+                setModalWindow={setModalWindow}
+                setModalImages={setModalImages}
+                setModalIndexImages={setModalIndexImages}
+              />
             )}
           </div>
 
@@ -78,6 +91,15 @@ const ViewPlace = () => {
           )}
         </div>
       </div>
+      <Modal modalActive={modalActive} setModalActive={setModalActive}>
+        {modalWindow === 'slider' && (
+          <ModalSlider
+            images={modalImages}
+            sliderIndex={11}
+            modalIndexImages={modalIndexImages}
+          />
+        )}
+      </Modal>
     </Layout>
   );
 };
