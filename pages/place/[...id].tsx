@@ -42,7 +42,7 @@ const ViewPlace = () => {
   }, [id]);
   usePlaceFetch();
   return (
-    <Layout>
+    <Layout title={`Бутик 64 ${placeInfo.title}`} description="" keywords="">
       <div className={styles.container}>
         <div className={styles.content}>
           <h2 className={styles.content__title}>{placeInfo.title}</h2>

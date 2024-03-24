@@ -75,7 +75,7 @@ function Lifestyle() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [placesAfisha, mainAfisha]);
   return (
-    <Layout>
+    <Layout title={`Бутик 64 FASHION`} description="" keywords="">
       <News
         news={mergeNews}
         title={'Новости города'}
