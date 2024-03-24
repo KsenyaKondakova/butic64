@@ -139,3 +139,7 @@ export interface IContactForm {
   userMessage: string;
   userEmail: string;
 }
+
+export interface LayoutProps {
+  titile: string;
+}

@@ -1,13 +1,11 @@
 import React from 'react';
 
 import { ContactForm } from '@/components/ContactForm/ContactForm';
-import { Footer } from '@/components/Footer/Footer';
 import Layout from '@/components/Layout/Layout';
-import Nav from '@/components/Nav/Nav';
 
 function Contacts() {
   return (
-    <Layout>
+    <Layout title={`Бутик 64 Контакты`} description="" keywords="">
       <div className="contacts">
         <div className="contacts__container">
           {' '}
