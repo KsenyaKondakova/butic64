@@ -7,16 +7,22 @@ type ModalProps = {
   setModalActive: React.Dispatch<React.SetStateAction<boolean>>;
 
   children: React.ReactNode;
+  setModalIndexImages?: React.Dispatch<React.SetStateAction<number>>;
 };
 export const Modal = ({
   modalActive,
   setModalActive,
+  setModalIndexImages,
   children,
 }: ModalProps) => {
+  const closeModal = () => {
+    setModalIndexImages && setModalIndexImages(1);
+    setModalActive(false);
+  };
   return (
     <div
       className={`${styles.modal} ${modalActive ? styles.active : ''}`}
-      onClick={() => setModalActive(false)}
+      onClick={() => closeModal()}
     >
       <div
         className={styles.modal__content}

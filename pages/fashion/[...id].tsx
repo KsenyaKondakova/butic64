@@ -59,7 +59,6 @@ function Lifestyle() {
     if (!id) {
       return;
     }
-    console.log(id);
     const categoryId = Array.isArray(id) ? id[0] : id;
     axios.get('/api/fashion?id=' + categoryId).then((response) => {
       dispatch(setFashionPlaces(response.data));
