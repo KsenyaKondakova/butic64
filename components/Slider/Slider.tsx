@@ -115,6 +115,7 @@ const Slider: React.FC<SliderProps> = ({
               width={320}
               height={200}
               objectFit="cover"
+              loading="lazy"
             />
           </SwiperSlide>
         ))}
