@@ -54,5 +54,5 @@ export default async function apiHandler(
     console.error('Server error:', error);
     return res.status(400).json({ error: 'Internal Server Error' });
   }
-  console.log(req.body);
+  
 }

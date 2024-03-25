@@ -25,7 +25,7 @@ const ViewPlace = () => {
     (state: RootState) => state.lifeStyle.placeInfo,
   );
   const lifeStyleCategories = useLifeStyleCategories();
-  console.log(lifeStyleCategories.find((item) => item.name === 'Психолог'));
+
   const id: string | string[] | undefined = router.query.id;
   const [modalActive, setModalActive] = useState<boolean>(false);
   const [modalWindow, setModalWindow] = useState<string>('');
@@ -37,7 +37,6 @@ const ViewPlace = () => {
     }
     axios.get('/api/getPlace?id=' + id).then((response) => {
       dispatch(setPlaceInfoLifeStyle(response.data));
-      console.log(response.data);
     });
   }, [id]);
   usePlaceFetch();

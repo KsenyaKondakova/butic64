@@ -58,7 +58,7 @@ function Lifestyle() {
     if (!id) {
       return;
     }
-    console.log(id);
+
     const categoryId = Array.isArray(id) ? id[0] : id;
     axios.get('/api/beauty?id=' + categoryId).then((response) => {
       dispatch(setBeautyPlaces(response.data));
