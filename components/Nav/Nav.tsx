@@ -36,7 +36,7 @@ function Nav() {
   const [fashionActive, setFashionActive] = useState<boolean>(false);
   const [lifeStyleActive, setLifeStyleActive] = useState<boolean>(false);
   const currentMonth = new Date().getMonth() + 1;
-  console.log(stars);
+
   useStarsFetch();
   return (
     <header className={styles.header}>

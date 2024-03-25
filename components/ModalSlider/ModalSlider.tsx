@@ -40,7 +40,7 @@ const ModalSlider: React.FC<SliderProps> = ({
       setModalImages(images);
     }
   };
-  console.log(modalIndexImages);
+  console.log('индекс', modalIndexImages);
   return (
     <div className={styles.container}>
       <Swiper

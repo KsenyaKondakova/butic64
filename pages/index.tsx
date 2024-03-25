@@ -110,7 +110,11 @@ export default function Home() {
         setModalWindow={setModalWindow}
       />
 
-      <Modal modalActive={modalActive} setModalActive={setModalActive}>
+      <Modal
+        modalActive={modalActive}
+        setModalActive={setModalActive}
+        setModalIndexImages={setModalIndexImages}
+      >
         {modalWindow === 'news' && (
           <>
             <span className="modal__newsName">{modalNews.newsName}</span>

@@ -11,7 +11,7 @@ const Cards: React.FC<CardsProps> = ({ data, categories }) => {
     <div className={styles.container + ' ' + 'grid__cards'}>
       {data.map((obj) => {
         const category = categories.find((cat) => cat._id === obj.category);
-        console.log(category);
+
         return (
           <article key={obj._id} className={styles.article}>
             <Link href={'/place/' + obj._id} className={styles.link}>

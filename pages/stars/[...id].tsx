@@ -75,7 +75,6 @@ const Stars = () => {
     if (!id) {
       return;
     }
-    console.log(id);
     const starId = Array.isArray(id) ? id[0] : id;
     axios.get('/api/stars?id=' + starId).then((response) => {
       dispatch(setViewStar(response.data));
