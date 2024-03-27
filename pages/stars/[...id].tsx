@@ -103,6 +103,10 @@ const Stars = () => {
             <Slider
               images={viewStar.images ? viewStar.images : []}
               sliderIndex={1}
+              setModalActive={setModalActive}
+              setModalWindow={setModalWindow}
+              setModalImages={setModalImages}
+              setModalIndexImages={setModalIndexImages}
             />
             <div className="stars__text__container">
               {viewStar.description && (
@@ -182,7 +186,11 @@ const Stars = () => {
         setModalWindow={setModalWindow}
       />
 
-      <Modal modalActive={modalActive} setModalActive={setModalActive}>
+      <Modal
+        modalActive={modalActive}
+        setModalActive={setModalActive}
+        setModalIndexImages={setModalIndexImages}
+      >
         {modalWindow === 'news' && (
           <>
             <span className="modal__newsName">{modalNews.newsName}</span>

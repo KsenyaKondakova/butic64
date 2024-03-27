@@ -175,19 +175,26 @@ body {
     justify-content: center;
     column-gap: 40px;
     &__item {
-      width: 20%;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: space-between;
       row-gap: 10px;
       cursor: pointer;
       &__div {
         cursor: default;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        row-gap: 10px;
       }
       &__container {
         width: 100%;
         height: 300px;
         position: relative;
+        display: flex;
+        justify-content: center;
       }
       &__img {
         width: auto;
