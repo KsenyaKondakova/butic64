@@ -292,7 +292,7 @@ function Nav() {
                     return (
                       places.find((obj) => obj.category === item._id) && (
                         <li key={index}>
-                          <Link href={'/fashion' + item._id}>{item.name}</Link>
+                          <Link href={'/fashion/' + item._id}>{item.name}</Link>
                         </li>
                       )
                     );
