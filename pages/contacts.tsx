@@ -15,6 +15,24 @@ function Contacts() {
             заполните форму ниже
           </p>
           <ContactForm />
+          <ul className="contacts__people">
+            <li>
+              <span className="contacts__people__post">ГЛАВНЫЙ РЕДАКТОР</span>
+              <div>
+                <span className="contacts__people__name">
+                  Екатерина Паравина
+                </span>
+                <a href="tel:+79063050000">+7 906 305-00-00</a>
+              </div>
+            </li>
+            <li>
+              <span className="contacts__people__post">ШЕФ РЕДАКТОР</span>
+              <div>
+                <span className="contacts__people__name">Елена Машинская</span>
+                <a href="tel:+79271597555">+7 927 159-75-55</a>
+              </div>
+            </li>
+          </ul>
         </div>
 
         <a
