@@ -102,7 +102,7 @@ const Stars = () => {
             </h2>
             <Slider
               images={viewStar.images ? viewStar.images : []}
-              sliderIndex={1}
+              sliderIndex={2}
               setModalActive={setModalActive}
               setModalWindow={setModalWindow}
               setModalImages={setModalImages}
