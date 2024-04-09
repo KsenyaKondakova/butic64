@@ -149,6 +149,7 @@ body {
   width: auto;
 
   max-width: 1180px;
+  width: calc(100% - 700px);
   margin: 0 auto;
   grid-area: cards;
   padding-bottom: 20px;
@@ -301,6 +302,7 @@ body {
     height: 100%;
   }
 }
+
 @media (max-width: 1030px) {
   .gallery {
     order: 3;
