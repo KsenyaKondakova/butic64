@@ -59,19 +59,11 @@ const Slider: React.FC<SliderProps> = ({
             spaceBetween: 2,
           },
           450: {
+            slidesPerView: 2,
+            spaceBetween: 2,
+          },
+          787: {
             slidesPerView: 3,
-            spaceBetween: 2,
-          },
-          600: {
-            slidesPerView: 4,
-            spaceBetween: 2,
-          },
-          700: {
-            slidesPerView: 5,
-            spaceBetween: 2,
-          },
-          850: {
-            slidesPerView: 6,
             spaceBetween: 2,
           },
           1030: {
