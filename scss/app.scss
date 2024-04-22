@@ -181,6 +181,8 @@ body {
       align-items: center;
       justify-content: space-between;
       row-gap: 10px;
+      width: 200px;
+     
       cursor: pointer;
       &__div {
         cursor: default;
@@ -198,9 +200,9 @@ body {
         justify-content: center;
       }
       &__img {
-        width: auto;
+        width: 200px;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
       }
       &__name {
         display: flex;
